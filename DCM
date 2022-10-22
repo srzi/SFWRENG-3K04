@@ -1,0 +1,1219 @@
+#10/19/2022 
+
+import json
+from tkinter import *
+from tkinter import messagebox
+import ast
+from tkinter import ttk
+wind = Tk()
+wind.title("Login")
+wind.geometry('955x600+300+150')
+wind.configure(bg='#fff')
+wind.resizable(False, False)
+
+frame = Frame(wind, width=400, height=400, bg='white')
+frame.place(x=250, y=100)
+
+heading1 = Label(text='3K04 Pacemaker DCM Login', fg='black', bg='#fff',
+                 font=('Microsoft YaHei UI Light', 18, 'bold'))
+heading1.place(x=35, y=10)
+
+heading = Label(frame, text='Login', fg='black', bg='white', font=('Microsoft YaHei UI Light', 24, 'bold'))
+heading.place(x=165, y=5)
+
+## LOGIN INFORMATION
+def signin():
+    username=user.get()
+    
+    password=passw.get()
+
+    
+    file = open('sign.txt', 'r')
+    
+    d = file.read()
+    
+    r = ast.literal_eval(d)
+    
+    file.close()
+###############################################################
+
+           #                  MODES                   
+
+###############################################################
+     
+    def AOO(): #function when button is clicked   
+
+        global master
+        master = Tk()
+        master.geometry("800x600+300+100")
+        master.title("AOO")
+        global LOWER_RATE_LIMIT
+        global UPPER_RATE_LIMIT
+        global B_AMPLITUDE
+        global PULSE_WIDTH
+        global SET_CURRENT_MODE
+        SET_CURRENT_MODE = 'AOO'
+        
+        Label(master, text = "SET VALUES BELOW" , font = ("Calibri", 14)).pack()
+        
+        Label(master, text = "").pack()
+
+        
+        
+        
+        
+        Label(master, text = "Lower Rate Limit (ppm)").pack()
+       
+        CHOICES = [
+            "30","35","40","45","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70",
+            "70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89",
+            "90","95","105","110","115","120","125","130","135","140","145","150","155","160","165","170","175",
+        ]
+        choice = DoubleVar()
+        choice.set(CHOICES[0])
+        list = ttk.Combobox(master, value= CHOICES)
+        list.current(14)
+        list.bind("<<ComboboxSelected>>")
+        list.pack() 
+        Label(master, text = "").pack()
+
+        
+        
+        
+        
+        Label(master, text = "Upper Rate Limit (ppm)").pack()
+        UPPER_RATE_LIMIT = Scale(master, from_=50, to =175, resolution=5, orient=HORIZONTAL)
+        UPPER_RATE_LIMIT.set(120)
+        UPPER_RATE_LIMIT.pack()
+        Label(master, text = "").pack()
+
+        
+        
+        
+        
+        Label(master, text = "Atrial Amplitude (V)").pack()
+        CHOICES1 = [
+            "0","0.5","0.6","0.7","0.8","0.9","1.0","1.1","1.2","1.3","1.4","1.5","1.6","1.7","1.8","1.9","2.0",
+            "2.1","2.2","2.3","2.4","2.5","2.6","2.7","2.8","2.9","3.0","3.1","3.2","3.5","4.0","4.5","5.0","5.5",
+            "6.0","6.5","7.0","7.5",
+        ]
+        choice1 = DoubleVar()
+        choice1.set(CHOICES1[0])
+        list1 = ttk.Combobox(master, value= CHOICES1)
+        list1.current(29)
+        list1.bind("<<ComboboxSelected>>")
+        list1.pack()
+        Label(master, text = "").pack()
+
+        
+        
+        
+        
+        Label(master, text = "Atrial Pulse Width (ms)").pack()
+        CHOICES2 = [
+            "0.05","0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","0.9","1.0","1.1","1.2","1.3","1.4","1.5","1.6","1.7","1.8","1.9",
+        ]
+        choice2 = DoubleVar()
+        choice2.set(CHOICES2[0])
+        list2 = ttk.Combobox(master, value= CHOICES2)
+        list2.current(4)
+        list2.bind("<<ComboboxSelected>>")
+        list2.pack()
+        Label(master, text = "").pack()
+           
+        
+        
+        
+        
+        def DISPLAY():
+            global LOWER_RATE_LIMIT
+            global UPPER_RATE_LIMIT
+            global B_AMPLITUDE
+            global PULSE_WIDTH
+            LOWER_RATE_LIMIT = list.get()
+            B_AMPLITUDE = list1.get()
+            PULSE_WIDTH = list2.get()
+            SET_VALS()
+            print("_____________________________________")
+            print("The values for AOO :")
+            print("LOWER RATE LIMIT : ",LOWER_RATE_LIMIT)
+            print("UPPER RATE LIMIT : ", UPPER_RATE_LIMIT.get()) 
+            print("ATTIAL AMPLITUDE : ",B_AMPLITUDE)
+            print("ATRIAL PULSE WIDTH : ",PULSE_WIDTH)
+            print("_____________________________________")
+            
+            
+
+        Button(master, text = "Save", width="3", height = "1", command = DISPLAY).pack()
+        Button(master, text = "load  ", width="3", height = "1", command = ACCESS_LOAD).pack()
+        Button(master, text="Back", command=master.destroy).pack() #button to close the window
+        Label(master, text = "Current USER:  %s" % (username),font = ("Calibri", 12)).pack(side = LEFT )
+        master.mainloop()
+
+        Label(master, text = "").pack()
+   ###############################################################
+##############################################################
+# 
+# 
+# 
+#      
+        
+        
+    def VOO(): #function when button is clicked   
+
+        global master
+        master = Tk()
+        master.geometry("800x600+300+100")
+        master.title("VOO")
+        global LOWER_RATE_LIMIT
+        global UPPER_RATE_LIMIT
+        global B_AMPLITUDE
+        global PULSE_WIDTH
+        global SET_CURRENT_MODE
+        SET_CURRENT_MODE = 'VOO'
+
+        Label(master, text = "SET VALUES BELOW", font = ("Calibri", 13)).pack()
+        Label(master, text = "").pack()
+
+        
+        
+        
+        
+        
+        
+        Label(master, text = "Lower Rate Limit (ppm)").pack()
+        CHOICES = [
+            "30","35","40","45","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70",
+            "70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89",
+            "90","95","105","110","115","120","125","130","135","140","145","150","155","160","165","170","175",
+        ]
+        choice = DoubleVar()
+        
+        choice.set(CHOICES[0])
+        
+        list = ttk.Combobox(master, value= CHOICES)
+        
+        list.current(14)
+        
+        list.bind("<<ComboboxSelected>>")
+        
+        list.pack() 
+
+        Label(master, text = "").pack()
+
+        
+        
+        Label(master, text = "Upper Rate Limit (ppm)").pack()
+        UPPER_RATE_LIMIT = Scale(master, from_=50, to =175, resolution=5, orient=HORIZONTAL)
+        UPPER_RATE_LIMIT.set(120)
+        UPPER_RATE_LIMIT.pack()
+        Label(master, text = "").pack()
+
+
+
+
+
+        Label(master, text = "Ventricular Amplitude (V)").pack()
+        CHOICES1 = [
+            "0","0.5","0.6","0.7","0.8","0.9","1.0","1.1","1.2","1.3","1.4","1.5","1.6","1.7","1.8","1.9","2.0",
+            "2.1","2.2","2.3","2.4","2.5","2.6","2.7","2.8","2.9","3.0","3.1","3.2","3.5","4.0","4.5","5.0","5.5",
+            "6.0","6.5","7.0","7.5",
+        ]
+        choice1 = DoubleVar()
+        choice1.set(CHOICES1[0])
+        list1 = ttk.Combobox(master, value= CHOICES1)
+        list1.current(29)
+        list1.bind("<<ComboboxSelected>>")
+        list1.pack()
+        Label(master, text = "").pack()
+
+
+
+
+
+
+        Label(master, text = "Ventricular Pulse Width (ms)").pack()
+        CHOICES2 = [
+            "0.05","0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","0.9","1.0","1.1","1.2","1.3","1.4","1.5","1.6","1.7","1.8","1.9",
+        ]
+        choice2 = DoubleVar()
+        choice2.set(CHOICES2[0])
+        list2 = ttk.Combobox(master, value= CHOICES2)
+        list2.current(4)
+        list2.bind("<<ComboboxSelected>>")
+        list2.pack()
+        Label(master, text = "").pack()
+        
+        
+        
+        def DISPLAY():
+            global LOWER_RATE_LIMIT
+            global UPPER_RATE_LIMIT
+            global B_AMPLITUDE
+            global PULSE_WIDTH
+            LOWER_RATE_LIMIT = list.get()
+            B_AMPLITUDE = list1.get()
+            PULSE_WIDTH = list2.get()
+            SET_VALS()
+            print("_____________________________________")
+            print("The values for VOO :")
+            print("LOWER RATE LIMIT : ",LOWER_RATE_LIMIT)
+            print("UPPER RATE LIMIT : ", UPPER_RATE_LIMIT.get()) 
+            print("VENT AMPLITUDE : ",B_AMPLITUDE)
+            print("VENT PULSE WIDTH : ",PULSE_WIDTH)
+            print("_____________________________________")
+        Button(master, text = "Save", width="3", height = "1", command = DISPLAY).pack()
+        Button(master, text = "load", width="3", height = "1", command = ACCESS_LOAD).pack()
+        Button(master, text="Back", command=master.destroy).pack() #button to close the window
+        Label(master, text = "Current USER:  %s" % (username),font = ("Calibri", 13)).pack(side = LEFT )
+
+        Label(master, text = "").pack()   
+        
+
+
+
+    ###############################################################
+############################################################## 
+# 
+# 
+# 
+#    
+    def AAI(): #function when button is clicked   
+        global SET_CURRENT_MODE
+        SET_CURRENT_MODE = 'AAI'
+        global master
+        master = Tk()
+        master.geometry("800x900+300+100")
+        master.title("AAI")
+        global LOWER_RATE_LIMIT
+        global UPPER_RATE_LIMIT
+        global B_AMPLITUDE
+        global PULSE_WIDTH
+        global ARP_VRP
+        global PVARp
+        global atrSENS
+        global Hyster
+        global rateSmoot
+
+        Label(master, text = "SET VALUES BELOW", font = ("Calibri", 13)).pack()
+        Label(master, text = "").pack()
+
+        
+        
+        Label(master, text = "Lower Rate Limit (ppm)").pack()
+        CHOICES = [
+            "30","35","40","45","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70",
+            "70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89",
+            "90","95","105","110","115","120","125","130","135","140","145","150","155","160","165","170","175",
+        ]
+        choice = DoubleVar()
+        choice.set(CHOICES[0])
+        list = ttk.Combobox(master, value= CHOICES)
+        list.current(14)
+        list.bind("<<ComboboxSelected>>")
+        list.pack() 
+        Label(master, text = "").pack()
+
+        
+        
+        
+        Label(master, text = "Upper Rate Limit (ppm)").pack()
+        UPPER_RATE_LIMIT = Scale(master, from_=50, to =175, resolution=5, orient=HORIZONTAL)
+        UPPER_RATE_LIMIT.set(120)
+
+        UPPER_RATE_LIMIT.pack()
+        Label(master, text = "").pack()
+
+       
+       
+       
+        Label(master, text = "Atrial Amplitude (V)").pack()
+        CHOICES1 = [
+            "0","0.5","0.6","0.7","0.8","0.9","1.0","1.1","1.2","1.3","1.4","1.5","1.6","1.7","1.8","1.9","2.0",
+            "2.1","2.2","2.3","2.4","2.5","2.6","2.7","2.8","2.9","3.0","3.1","3.2","3.5","4.0","4.5","5.0","5.5",
+            "6.0","6.5","7.0","7.5",
+        ]
+        choice1 = DoubleVar()
+        choice1.set(CHOICES1[0])
+        list1 = ttk.Combobox(master, value= CHOICES1)
+        list1.current(29)
+        list1.bind("<<ComboboxSelected>>")
+        list1.pack()
+        Label(master, text = "").pack()
+
+        
+        
+        
+        
+        
+        Label(master, text = "Atrial Pulse Width (ms)").pack()
+        CHOICES2 = [
+            "0.05","0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","0.9","1.0","1.1","1.2","1.3","1.4","1.5","1.6","1.7","1.8","1.9",
+        ]
+        choice2 = DoubleVar()
+        choice2.set(CHOICES2[4])
+        list2 = ttk.Combobox(master, value= CHOICES2)
+        list2.current(0)
+        list2.bind("<<ComboboxSelected>>")
+        list2.pack()
+        Label(master, text = "").pack()
+        
+
+
+        
+        
+        
+        Label(master, text = "ARP(ms)").pack()
+        CHOICES3 = [
+            "150","160","170","180","190","200","210","220","230","240","250","260","270","280","290","300","310","320","330","340","350","360","370","380","390","400","410","420","430","440","450","460","470","480","490","500",
+        ]
+        choice3 = DoubleVar()
+        choice3.set(CHOICES3[0])
+        list3 = ttk.Combobox(master, value= CHOICES3)
+        list3.current(17)
+        list3.bind("<<ComboboxSelected>>")
+        list3.pack()
+        Label(master, text = "").pack()
+        
+        
+        
+        
+        
+        Label(master, text = "Atrial sensistivity").pack()
+        CHOICES4 = [
+            "0.25","0.5","0.75","1","1.5","2","2.5","3","3.5","4","4.5","5","5.5","6","6.5","7","7.5","8","8.5","9","9.5","10"]
+        choice4 = DoubleVar()
+        choice4.set(CHOICES4[0])
+        list4 = ttk.Combobox(master, value= CHOICES4)
+        list4.current(2)
+        list4.bind("<<ComboboxSelected>>")
+        list4.pack()
+        Label(master, text = "").pack()
+        
+        
+        
+        
+        Label(master, text = "Hystereisis").pack()
+        CHOICES5 = ["OFF","Same as LRL"]
+        choice5 = DoubleVar()
+        choice5.set(CHOICES5[0])
+        list5 = ttk.Combobox(master, value= CHOICES5)
+        list5.current(0)
+        list5.bind("<<ComboboxSelected>>")
+        list5.pack()
+        Label(master, text = "").pack()
+        
+
+
+
+
+        Label(master, text = "Rate smoothing").pack()
+        rateSmoot = Scale(master, from_=0, to =25,resolution=3.07, orient=HORIZONTAL)
+        rateSmoot.set(0)
+        rateSmoot.pack()
+        Label(master, text = "").pack()
+        
+        
+
+
+
+        Label(master, text = "PVARP").pack()
+        PVARp = Scale(master, from_=150, to =500,resolution=10, orient=HORIZONTAL)
+        PVARp.pack()
+        PVARp.set(250)
+        Label(master, text = "").pack()
+        
+
+
+        def DISPLAY():
+            global LOWER_RATE_LIMIT
+            global UPPER_RATE_LIMIT
+            global B_AMPLITUDE
+            global PULSE_WIDTH
+            global ARP_VRP
+            
+            global atrSENS
+            global Hyster
+            global rateSmoot
+            global PVARp
+
+            
+            
+            LOWER_RATE_LIMIT = list.get()
+            B_AMPLITUDE = list1.get()
+            PULSE_WIDTH = list2.get()
+            ARP_VRP = list3.get()
+            atrSENS = list4.get()
+            Hyster=list5.get()
+            SET_VALS()
+            print("_____________________________________")
+            print("The values for AAI :")
+            print("LOWER RATE LIMIT : ",LOWER_RATE_LIMIT)
+            print("UPPER RATE LIMIT : ", UPPER_RATE_LIMIT.get()) 
+            print("ATRIAL AMPLITUDE : ",B_AMPLITUDE)
+            print("ATRIAL PULSE WIDTH : ",PULSE_WIDTH)
+            print(" ARP : ",ARP_VRP)
+            print("ATRIAL SENSITIVITY : ", atrSENS) 
+            print("HYSTERESIS : ",Hyster)
+            print("RATESMOOTHING: ",rateSmoot.get())
+            print("RATESMOOTHING: ",PVARp.get())
+            print("_____________________________________") 
+        Button(master, text = "Save", width="3", height = "1", command = DISPLAY).pack()
+        Button(master, text = "load", width="3", height = "1", command = ACCESS_LOAD).pack()
+        Button(master, text="Back", command=master.destroy).pack() #button to close the window
+        Label(master, text = "Current USER:  %s" % (username),font = ("Calibri", 13)).pack(side = LEFT )
+
+        Label(master, text = "").pack()
+       
+    ###############################################################
+############################################################## 
+# 
+# 
+# 
+#    
+        
+    def VVI(): #function when button is clicked   
+        global SET_CURRENT_MODE
+        SET_CURRENT_MODE = 'VVI'
+        global master
+        master = Tk()
+        master.geometry("900x700+300+100")
+        master.title("VVI")
+        global LOWER_RATE_LIMIT
+        global UPPER_RATE_LIMIT
+        global B_AMPLITUDE 
+        global PULSE_WIDTH
+        global ARP_VRP
+        global VentSENS
+        global Hyster
+        global rateSmoot
+
+        Label(master, text = "SET VALUES BELOW", font = ("Calibri", 13)).pack()
+        Label(master, text = "").pack()
+
+
+
+
+
+
+
+
+        Label(master, text = "Lower Rate Limit (ppm)").pack()
+        CHOICES = [
+            "30","35","40","45","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70",
+            "70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89",
+            "90","95","105","110","115","120","125","130","135","140","145","150","155","160","165","170","175",
+        ]
+        choice = DoubleVar()
+        choice.set(CHOICES[0])
+        list = ttk.Combobox(master, value= CHOICES)
+        list.current(14)
+        list.bind("<<ComboboxSelected>>")
+        list.pack() 
+        Label(master, text = "").pack()
+
+
+
+
+
+
+
+        Label(master, text = "Upper Rate Limit (ppm)").pack()
+        UPPER_RATE_LIMIT = Scale(master, from_=50, to =175, resolution=5, orient=HORIZONTAL)
+        UPPER_RATE_LIMIT.set(120)
+
+        UPPER_RATE_LIMIT.pack()
+        Label(master, text = "").pack()
+
+
+
+
+
+
+        Label(master, text = "Ventricular Amplitude (V)").pack()
+        CHOICES1 = [
+            "0","0.5","0.6","0.7","0.8","0.9","1.0","1.1","1.2","1.3","1.4","1.5","1.6","1.7","1.8","1.9","2.0",
+            "2.1","2.2","2.3","2.4","2.5","2.6","2.7","2.8","2.9","3.0","3.1","3.2","3.5","4.0","4.5","5.0","5.5",
+            "6.0","6.5","7.0","7.5",
+        ]
+        choice1 = DoubleVar()
+        choice1.set(CHOICES1[0])
+        list1 = ttk.Combobox(master, value= CHOICES1)
+        list1.current(29)
+        list1.bind("<<ComboboxSelected>>")
+        list1.pack()
+        Label(master, text = "").pack()
+
+
+
+
+
+
+
+
+
+        Label(master, text = "Ventricular Pulse Width (ms)").pack()
+        CHOICES2 = [
+            "0.05","0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","0.9","1.0","1.1","1.2","1.3","1.4","1.5","1.6","1.7","1.8","1.9",
+        ]
+        choice2 = DoubleVar()
+        choice2.set(CHOICES2[0])
+        list2 = ttk.Combobox(master, value= CHOICES2)
+        list2.current(4)
+        list2.bind("<<ComboboxSelected>>")
+        list2.pack()
+        Label(master, text = "").pack()
+        
+
+
+
+
+
+
+        Label(master, text = "VRP(ms)").pack()
+        CHOICES3 = [
+            "150","160","170","180","190","200","210","220","230","240","250","260","270","280","290","300","310","320","330","340","350","360","370","380","390","400","410","420","430","440","450","460","470","480","490","500",
+        ]
+        choice3 = DoubleVar()
+        choice3.set(CHOICES3[0])
+        list3 = ttk.Combobox(master, value= CHOICES3)
+        list3.current(17)
+        list3.bind("<<ComboboxSelected>>")
+        list3.pack()
+        Label(master, text = "").pack()
+        
+        
+
+
+
+
+        
+        
+        Label(master, text = "Ventricular sensistivity").pack()
+        CHOICES4 = [
+            "0.25","0.5","0.75","1","1.5","2","2.5","3","3.5","4","4.5","5","5.5","6","6.5","7","7.5","8","8.5","9","9.5","10"]
+        choice4 = DoubleVar()
+        choice4.set(CHOICES4[0])
+        list4 = ttk.Combobox(master, value= CHOICES4)
+        list4.current(6)
+        list4.bind("<<ComboboxSelected>>")
+        list4.pack()
+        Label(master, text = "").pack()
+          
+            
+
+
+
+        Label(master, text = "Hystereisis").pack()
+        CHOICES5 = ["OFF","Same as LRL"]
+        choice5 = DoubleVar()
+        choice5.set(CHOICES5[0])
+        list5 = ttk.Combobox(master, value= CHOICES5)
+        list5.current(0)
+        list5.bind("<<ComboboxSelected>>")
+        list5.pack()
+        Label(master, text = "").pack() 
+        
+        
+
+
+
+
+
+
+        Label(master, text = "Rate smoothing").pack()
+        rateSmoot = Scale(master, from_=0, to =25,resolution=3.07, orient=HORIZONTAL)
+        rateSmoot.set(0)
+        rateSmoot.pack()
+        Label(master, text = "").pack()
+
+
+
+
+
+        def DISPLAY():
+            global LOWER_RATE_LIMIT
+            global UPPER_RATE_LIMIT
+            global B_AMPLITUDE 
+            global PULSE_WIDTH
+            global ARP_VRP
+            global VentSENS
+            global Hyster
+            global rateSmoot
+            LOWER_RATE_LIMIT = list.get()
+            B_AMPLITUDE = list1.get()
+            PULSE_WIDTH = list2.get()
+            ARP_VRP = list3.get()
+            VentSENS = list4.get()
+            Hyster=list5.get()
+            SET_VALS()
+            print("_____________________________________")
+            print("The values for VVI :")
+            print("LOWER RATE LIMIT : ",LOWER_RATE_LIMIT)
+            print("UPPER RATE LIMIT : ", UPPER_RATE_LIMIT.get()) 
+            print("VENT AMPLITUDE : ",B_AMPLITUDE)
+            print("VENT PULSE WIDTH : ",PULSE_WIDTH)
+            print(" VRP : ",ARP_VRP)
+            print("VENT SENSITIVITY : ", VentSENS) 
+            print("HYSTERESIS : ",Hyster)
+            print("RATESMOOTHING: ",rateSmoot.get())
+            print("_____________________________________")            
+        Button(master, text = "Save", width="3", height = "1", command = DISPLAY).pack()
+        Button(master, text = "load", width="3", height = "1", command = ACCESS_LOAD).pack()
+        Button(master, text="Back", command=master.destroy).pack() #button to close the window
+        Label(master, text = "Current USER:  %s" % (username),font = ("Calibri", 13)).pack(side = LEFT )
+
+        Label(master, text = "").pack()
+  ###############################################################
+
+           #                  CONNECT SCREEN + MODES                   
+
+###############################################################      
+    def connect():
+        screen.destroy()
+        messagebox.showinfo('Success','Device Connected!')
+     
+        
+        window = Tk()
+        window.geometry('925x320+300+150')
+        button2 = Button(window,width=20, pady=6,  text= "1.    AOO",bg='white', fg='black', border=1,command=AOO).place(x=420,y=40) #input button
+     
+        Label(window, text = "Please select your mode:", font = ("Calibri", 13)).place(x=420,y=20)
+
+       
+#############################################BUTTONS FOR MODES
+
+        button3 = Button(window,width=20, pady=6,  text= "2.    VVI",bg='white', fg='black', border=1,command=VVI).place(x=420,y=100) #input button
+   
+        button4 = Button(window,width=20, pady=6,  text= "3.    VOO",bg='white', fg='black', border=1,command=VOO).place(x=420,y=160) #input button
+    
+        button5 = Button(window,width=20, pady=6, text= "4.     AAI",bg='white', fg='black', border=1,command=AAI).place(x=420,y=220) #input button
+      
+
+        Button(window, width=20, pady=2, text="Logout",bg='black', fg='white', border=1, command=window.destroy).place(x=420, y=280) #button to close the window
+        Label(window, text = "Current USER:  %s" % (username),font = ("Calibri", 13)).pack(side = LEFT )
+
+        
+        window.mainloop()
+##############################################CONNECT BUTTON          
+    if username in r.keys() and password==r[username]:
+        
+        screen = Tk()
+        screen.geometry('300x100+300+150')
+       
+        screen.title("Connect")
+        screen.config(bg='white')
+    
+        label=Label(screen, text="Please click the button below to connect your device").pack() 
+       
+          
+      
+        button = Button(screen, text= "Connect") #input button
+        button.config(command=connect)
+        button.pack(side=TOP,padx=0,pady=0)
+       
+ 
+        
+        
+        frame = Frame(screen, width=350, height=350, bg='white')
+        frame.place(x=250, y=100)
+        
+     
+
+        screen.destroy
+        modes = 'The modes';
+      
+    else:
+        messagebox.showerror('Error', 'User not in system')
+
+        mainloop()
+
+###############################################################
+###############################################################
+    ###################
+
+
+
+
+    # #REGISTRATION SYSTEM
+
+
+
+
+    # ########################################### ###############################################################        
+###############################################################
+###############################################################
+###############################################################
+        ## SIGN UP POP-UP
+def registerPopup():
+    window=Toplevel(wind)
+##--
+    window.title("Register")
+    window.geometry('925x500+300+150')
+    window.configure(bg='#fff')
+    window.resizable(False, False)
+
+    Label(window, text='Register', fg='black', bg='white', font=('Microsoft YaHei UI', 24)).place(x=100, y=20)
+
+    ## REGISTER
+    def register():
+        username = user.get()
+        password = passw.get()
+        passwordConfirm = passwConfirm.get()
+
+        if password == passwordConfirm:
+
+  
+            try:
+                file = open('sign.txt', 'r+')
+                d = file.read()
+                r = ast.literal_eval(d)
+                dict1 = {username: password}
+                leng = len(username)
+                leng2 = len(password)
+                special = "_=,<>!*()-+?/@#$%^& "
+                space = " "
+                if any(c in space for c in password):
+                    messagebox.showerror('Error', 'Space in password!')
+                elif (leng2 > 20):
+                    messagebox.showerror('Error', 'more than 20 characters!')
+                elif username in r.keys():
+                    messagebox.showerror('Error', 'Username Already Exists!')
+                elif (leng > 20):
+                    messagebox.showerror('Error', 'more than 20 characters!')
+                elif any(c in special for c in username):
+                    messagebox.showerror('Error', 'Special in user!')    
+                else: 
+                    if len(r) <= 10:
+                        r.update(dict1)
+                        file.truncate(0)
+                        file.close()
+                        file = open('sign.txt', 'w')
+                        w = file.write(str(r))
+                        messagebox.showerror('Success', 'Registered Successfully!')
+                    else:
+                        messagebox.showerror('Error', 'User Capacity Reached!')
+            except:
+                file = open('sign.txt', 'w')
+                pp = str({'username': 'password'})
+                file.write(pp)
+                file.close()
+
+###############################################################
+#########################
+# 
+# 
+# 
+# CREATE JSON FILE FOR THE USER REGISTER
+# 
+#  
+
+# #####################################
+            try:
+				
+                person_data=[{"username": " ",
+                    "AOO": {
+                        "LRL": "",
+                        "URL": "",
+                        "AA": "",
+                        "APW": ""
+                    },
+                    "AAI": {
+                        "LRL": "",
+                        "URL": "",
+                        "AA": "",
+                        "APW": "",
+                        "ARP": "",
+                        "AS": "",
+                        "PVARP": "",
+                        "H": "",
+                        "S": ""
+                    },
+                    "VOO": {
+                        "LRL": "",
+                        "URL": "",
+                        "VA": "",
+                        "VPW": ""
+                    },
+                    "VVI": {
+                        "LRL": "",
+                        "URL": "",
+                        "VA": "",
+                        "VPW": "",
+                        "VRP": "",
+                        "VS": "",
+                        "H": "",
+                        "S": ""
+                    }}]
+                with open('data.json','w') as f:
+                    json.dump(person_data,f,indent=4)
+                f.close()
+###########################################################################NEW ADDITION TO FILE 
+                f = open("data.json", "r+")
+                
+                data = json.load(f)
+                
+                NEW_USER_DATA = {"username": f"{username}",
+                    "AOO": {
+                        "LRL": "",
+                        "URL": "",
+                        "AA": "",
+                        "APW": ""
+                    },
+                    "AAI": {
+                        "LRL": "",
+                        "URL": "",
+                        "AA": "",
+                        "APW": "",
+                        "ARP": "",
+                        "AS": "",
+                        "PVARP": "",
+                        "H": "",
+                        "S": ""
+                    },
+                    "VOO": {
+                        "LRL": "",
+                        "URL": "",
+                        "VA": "",
+                        "VPW": ""
+                    },
+                    "VVI": {
+                        "LRL": "",
+                        "URL": "",
+                        "VA": "",
+                        "VPW": "",
+                        "VRP": "",
+                        "VS": "",
+                        "H": "",
+                        "S": ""
+                    }}
+                data.append(NEW_USER_DATA)
+                f.seek(0)
+                json.dump(data, f, indent=4)
+                f.close()
+            except:
+                messagebox.showerror("Error!","Error in json or txt files! Please clear them and try again")
+        else:
+            messagebox.showerror('Error', 'Passwords do not match!')
+
+#######################################################################################################################
+###################  FIELDS TO INSERTin IN REGISTER     ############################################
+##############################################################
+    ## USERNAME FIELD
+    def INSERTin(e):
+        user.delete(0, 'end')
+
+    def LOGOUT(e):
+        if user.get() == '':
+            user.insert(0, 'username')
+
+    user = Entry(window, width=25, fg='black', border=0, bg='white', font=('Microsoft Yahei UI Light', 11))
+    user.place(x=50, y=110)
+    user.insert(0, 'username')
+    user.bind("<FocusIn>", INSERTin)
+    user.bind("<FocusOut>", LOGOUT)
+    Frame(window, width=250, height=2, bg='black').place(x=50, y=137)
+
+    ## PASSWORD FIELD
+    def INSERTin(e):
+        passw.delete(0, 'end')
+
+    def LOGOUT(e):
+        if passw.get() == '':
+            passw.insert(0, 'password')
+
+    passw = Entry(window, width=25, fg='black', border=0, bg='white', font=('Microsoft Yahei UI Light', 11))
+    passw.place(x=50, y=170)
+    passw.insert(0, 'password')
+    passw.bind("<FocusIn>", INSERTin)
+    passw.bind("<FocusOut>", LOGOUT)
+    Frame(window, width=250, height=2, bg='black').place(x=50, y=197)
+
+    ## CONFIRM PASSWORD FIELD
+    def INSERTin(e):
+        passwConfirm.delete(0, 'end')
+
+    def LOGOUT(e):
+        if passwConfirm.get() == '':
+            passwConfirm.insert(0, 'Confirm Password')
+
+    passwConfirm = Entry(window, width=25, fg='black', border=0, bg='white', font=('Microsoft Yahei UI Light', 11))
+    passwConfirm.place(x=50, y=230)
+    passwConfirm.insert(0, 'Confirm Password')
+    passwConfirm.bind("<FocusIn>", INSERTin)
+    passwConfirm.bind("<FocusOut>", LOGOUT)
+    Frame(window, width=250, height=2, bg='black').place(x=50, y=257)
+
+    ## SIGN UP BUTTON
+    Button(window, width=30, pady=8, text="Sign Up", bg='black', fg='white', border=0, command=register).place(x=70, y=310)
+
+    window.mainloop()
+
+#######################################################################################################################
+###################  FIELDS TO INSERTin IN SIGN IN    ############################################
+##############################################################
+## USERNAME BOX
+def INSERTin(e):
+    user.delete(0, 'end')
+
+def LOGOUT(e):
+    if user.get() == '':
+        user.insert(0, 'username')
+
+user = Entry(frame, width=36, fg='black', border=0, bg='white', font=('Microsoft YaHei UI Light', 11))
+user.place(x=75, y=80)
+user.insert(0, 'username')
+user.bind('<FocusIn>', INSERTin)
+user.bind('<FocusOut>', LOGOUT)
+Frame(frame, width=295, height=2, bg='black').place(x=70, y=110)
+
+
+## PASSWORD BOX
+def INSERT1(e):
+    passw.delete(0, 'end')
+
+def LOGOUT1(e):
+    if passw.get() == '':
+        passw.insert(0, 'password')
+
+passw = Entry(frame, width=36, fg='black', border=0, bg='white', font=('Microsoft YaHei UI Light', 11))
+passw.place(x=75, y=150)
+passw.insert(0, 'password')
+passw.bind('<FocusIn>', INSERT1)
+passw.bind('<FocusOut>', LOGOUT1)
+Frame(frame, width=295, height=2, bg='black').place(x=70, y=180)
+
+## SIGN IN BUTTON
+Button(frame, width=30, pady=8, text='Sign in', bg='black', fg='white', border=0,command=signin).place(x=110, y=225)
+# SIGN UP
+Label(frame, text="Don't have an account ?", fg='black', bg='white', font=('Microsoft YaHei UI Light', 10)).place(x=120, y=265)
+Button(frame, width=6, text='Sign up', border=0, bg='white', cursor='hand2', fg='#57a1f8',command=registerPopup).place(x=270,y=267)
+
+###############################################################
+###############################################################
+    ###################
+
+
+
+
+    # #SET VALUES FOR THE USER AFTER HE SAVES 
+
+
+
+
+    # ########################################### ###############################################################        
+###############################################################
+###############################################################
+###############################################################
+
+
+
+
+
+def SET_VALS():
+    if SET_CURRENT_MODE=='AOO':
+        AOO_LOWER_RATE= LOWER_RATE_LIMIT
+        AOO_UPPER_RATE= str(UPPER_RATE_LIMIT.get())
+        AOO_ATRIAL_AMP= B_AMPLITUDE
+        AOO_ATRIAL_PW= PULSE_WIDTH
+        f = open("data.json", "r+")
+        data = json.load(f)
+        for INCREMENTED in data:
+            if INCREMENTED["username"] == user.get():
+                INCREMENTED["AOO"]["LRL"] = AOO_LOWER_RATE
+                INCREMENTED["AOO"]["URL"] = AOO_UPPER_RATE
+                INCREMENTED["AOO"]["AA"] = AOO_ATRIAL_AMP
+                INCREMENTED["AOO"]["APW"] = AOO_ATRIAL_PW
+        open("data.json", "w").write(
+            json.dumps(data, indent=4, separators=(',', ': '))
+        )
+    elif SET_CURRENT_MODE=='AAI':
+        AAI_LOWER_RATE=LOWER_RATE_LIMIT
+        AAI_UPPER_RATE=str(UPPER_RATE_LIMIT.get())
+        AAI_ATRIAL_AMP=B_AMPLITUDE
+        AAI_APW=PULSE_WIDTH
+        AAI_ARP=ARP_VRP
+        AAI_ATRIAL_SENSETIVITY= atrSENS
+        AAI_PVARP= str(PVARp.get()) 
+        AAI_HYSTERESIS= Hyster
+        AAI_RATE_SMOOTHING= str(rateSmoot.get())
+
+        f = open("data.json", "r+")
+        data = json.load(f)
+        for INCREMENTED in data:
+            if INCREMENTED["username"] == user.get():
+                INCREMENTED["AAI"]["LRL"] = AAI_LOWER_RATE
+                INCREMENTED["AAI"]["URL"] = AAI_UPPER_RATE
+                INCREMENTED["AAI"]["AA"] = AAI_ATRIAL_AMP
+                INCREMENTED["AAI"]["APW"] = AAI_APW
+                INCREMENTED["AAI"]["ARP"] = AAI_ARP
+                INCREMENTED["AAI"]["AS"] = AAI_ATRIAL_SENSETIVITY
+                INCREMENTED["AAI"]["PVARP"] = AAI_PVARP
+                INCREMENTED["AAI"]["H"] = AAI_HYSTERESIS
+                INCREMENTED["AAI"]["S"] = AAI_RATE_SMOOTHING
+        open("data.json", "w").write(
+            json.dumps(data, indent=4, separators=(',', ': '))
+        )
+    elif SET_CURRENT_MODE=='VOO':
+        VOO_LOWER_RATE=LOWER_RATE_LIMIT
+        VOO_UPPER_RATE=str(UPPER_RATE_LIMIT.get())
+        VOO_VENTRICUALAR_AMP=B_AMPLITUDE
+        VOO_VENTRICULAR_PW=PULSE_WIDTH
+        f = open("data.json", "r+")
+        data = json.load(f)
+        for INCREMENTED in data:
+            if INCREMENTED["username"] == user.get():
+                INCREMENTED["VOO"]["LRL"] = VOO_LOWER_RATE
+                INCREMENTED["VOO"]["URL"] = VOO_UPPER_RATE
+                INCREMENTED["VOO"]["VA"] = VOO_VENTRICUALAR_AMP
+                INCREMENTED["VOO"]["VPW"] = VOO_VENTRICULAR_PW
+        open("data.json", "w").write(
+            json.dumps(data, indent=4, separators=(',', ': '))
+        )
+    elif SET_CURRENT_MODE=='VVI':
+        
+        VVI_LOWER_RATE=LOWER_RATE_LIMIT
+        VVI_UPPER_RATE=str(UPPER_RATE_LIMIT.get())
+        VVI_VENTRICAL_AMP= B_AMPLITUDE
+        VVI_VENTRICAL_PW=PULSE_WIDTH
+        VVI_VRP=ARP_VRP
+        VVI_VENTRICULAR_SENSITIVITY=VentSENS
+        VVI_HYSTEREISIS=Hyster
+        VVI_RATE_SMOOTHINGS=str(rateSmoot.get())
+
+        f = open("data.json", "r+")
+        data = json.load(f)
+        for INCREMENTED in data:
+            if INCREMENTED["username"] == user.get():
+                INCREMENTED["VVI"]["LRL"] = VVI_LOWER_RATE
+                INCREMENTED["VVI"]["URL"] = VVI_UPPER_RATE
+                INCREMENTED["VVI"]["VA"] = VVI_VENTRICAL_AMP
+                INCREMENTED["VVI"]["VPW"] = VVI_VENTRICAL_PW
+                INCREMENTED["VVI"]["VRP"] = VVI_VRP
+                INCREMENTED["VVI"]["VS"] = VVI_VENTRICULAR_SENSITIVITY
+                INCREMENTED["VVI"]["H"] = VVI_HYSTEREISIS
+                INCREMENTED["VVI"]["S"] = VVI_RATE_SMOOTHINGS
+        open("data.json", "w").write(
+            json.dumps(data, indent=4, separators=(',', ': '))
+        )
+
+###############################################################
+###############################################################
+    ###################
+
+
+
+
+    # #LOAD THE VALUES FOR THE USER AFTER HE REOPEN
+
+
+
+
+    # ########################################### ###############################################################        
+###############################################################
+###############################################################
+###############################################################
+def ACCESS_LOAD():
+    if SET_CURRENT_MODE=='VOO':
+        f = open("data.json", "r+")
+        data = json.load(f)
+        for INCREMENTED in data:
+            if INCREMENTED["username"] == user.get():
+                if INCREMENTED["VOO"]["URL"] == "":
+                    print("Nothing to load, save parameters first")
+                    print("USER:", user.get())
+                else:
+                    VOO_LOWER_RATE = INCREMENTED["VOO"]["LRL"]
+                    VOO_UPPER_RATE = INCREMENTED["VOO"]["URL"]
+                    VOO_VENTRICUALAR_AMP = INCREMENTED["VOO"]["VA"]
+                    VOO_VENTRICULAR_PW = INCREMENTED["VOO"]["VPW"] 
+                    print("________________________________________________________") 
+                    print("PREVIOUS VALUES FOR VOO")
+                    print("CURRENT USER:", user.get())
+                    print("LOWER RATE LIMIT:", VOO_LOWER_RATE)
+                    print("UPPER RATE LIMIT:", VOO_UPPER_RATE)
+                    print("Vent AMPLITUDE:", VOO_VENTRICUALAR_AMP)
+                    print("Vent PULSE WIDTH:", VOO_VENTRICULAR_PW) 
+                    print("________________________________________________________")    
+    elif SET_CURRENT_MODE=='AOO':
+        f = open("data.json", "r+")
+        data = json.load(f)
+        for INCREMENTED in data:
+            if INCREMENTED["username"] == user.get():
+                if INCREMENTED["AOO"]["URL"] == "":
+                    print("Nothing to load, save parameters first")
+                    print("USER:", user.get())
+                else:
+                    AOO_LOWER_RATE = INCREMENTED["AOO"]["LRL"]
+                    AOO_UPPER_RATE = INCREMENTED["AOO"]["URL"]
+                    AOO_ATRIAL_AMP = INCREMENTED["AOO"]["AA"]
+                    AOO_ATRIAL_PW = INCREMENTED["AOO"]["APW"]
+                    print("________________________________________________________")  
+                    print("PREVIOUS VALUES FOR AOO")
+                    print("CURRENT USER:", user.get())
+                    print("LOWER RATE LIMIT:", AOO_LOWER_RATE)
+                    print("UPPER RATE LIMIT:", AOO_UPPER_RATE)
+                    print("ATRIAL AMPLITUDE:", AOO_ATRIAL_AMP)
+                    print("ATRIAL PULSE WIDTH:", AOO_ATRIAL_PW) 
+                    print("________________________________________________________")      
+    elif SET_CURRENT_MODE=='VVI':
+        f = open("data.json", "r+")
+        data = json.load(f)
+        for INCREMENTED in data:
+            if INCREMENTED["username"] == user.get():
+                if INCREMENTED["VVI"]["URL"] == "":
+                    print("Nothing to load, save parameters first")
+                    print("USER:", user.get())
+                else:
+                    VVI_LOWER_RATE = INCREMENTED["VVI"]["LRL"]
+                    VVI_UPPER_RATE = INCREMENTED["VVI"]["URL"]
+                    VVI_VENTRICAL_AMP = INCREMENTED["VVI"]["VA"]
+                    VVI_VENTRICAL_PW = INCREMENTED["VVI"]["VPW"]
+                    VVI_VRP = INCREMENTED["VVI"]["VRP"]
+                    VVI_VENTRICULAR_SENSITIVITY = INCREMENTED["VVI"]["VS"]
+                    VVI_HYSTEREISIS = INCREMENTED["VVI"]["H"]
+                    VVI_RATE_SMOOTHINGS = INCREMENTED["VVI"]["S"]
+                    print("________________________________________________________")
+                    print("PREVIOUS VALUES FOR VVI")
+                    print("CURRENT USER:", user.get())
+                    print("LOWER RATE LIMIT:", VVI_LOWER_RATE)
+                    print("UPPER RATE LIMIT:", VVI_UPPER_RATE)
+                    print("VENTRICULAR AMPLITUDE:", VVI_VENTRICAL_AMP)
+                    print("VENTRICULAR PULSE WIDTH:", VVI_VENTRICAL_PW)
+                    print("VENTRICULAR SENSITIVITY:", VVI_VENTRICULAR_SENSITIVITY)
+                    print("VRP:", VVI_VRP)
+                    print("HYSTERESIS:", VVI_HYSTEREISIS)
+                    print("RATE SMOOTHING:", VVI_RATE_SMOOTHINGS)
+                    print("________________________________________________________")
+    elif SET_CURRENT_MODE=='AAI':
+        f = open("data.json", "r+")
+        data = json.load(f)
+        for INCREMENTED in data:
+            if INCREMENTED["username"] == user.get():
+                if INCREMENTED["AAI"]["URL"] == "":
+                    print("Nothing to load, save parameters first")
+                    print("USER:", user.get())
+                else:
+                    AAI_LOWER_RATE = INCREMENTED["AAI"]["LRL"]
+                    AAI_UPPER_RATE = INCREMENTED["AAI"]["URL"]
+                    AAI_ATRIAL_AMP = INCREMENTED["AAI"]["AA"]
+                    AAI_APW = INCREMENTED["AAI"]["APW"]
+                    AAI_ARP = INCREMENTED["AAI"]["ARP"]
+                    AAI_ATRIAL_SENSETIVITY = INCREMENTED["AAI"]["AS"]
+                    AAI_PVARP = INCREMENTED["AAI"]["PVARP"]
+                    AAI_HYSTERESIS = INCREMENTED["AAI"]["H"]
+                    AAI_RATE_SMOOTHING = INCREMENTED["AAI"]["S"]
+                    print("________________________________________________________")
+                    print("PREVIOUS VALUES FOR AAI")
+                    print("CURRENT USER:", user.get())
+                    print("LOWER RATE LIMIT:", AAI_LOWER_RATE)
+                    print("UPPER RATE LIMIT:", AAI_UPPER_RATE)
+                    print("ATRIAL AMPLITUDE:", AAI_ATRIAL_AMP)
+                    print("ATRIAL PULSE WIDTH:", AAI_APW)
+                    print("ATRIAL SENSITIVITY:", AAI_ATRIAL_SENSETIVITY)
+                    print("ARP:", AAI_ARP)
+                    print("PVARP:", AAI_PVARP)
+                    print("HYSTERESIS:", AAI_HYSTERESIS)
+                    print("RATE SMOOTHING:", AAI_RATE_SMOOTHING)
+                    print("________________________________________________________")
+wind.mainloop()

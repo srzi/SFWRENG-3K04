@@ -1,8 +1,3 @@
-#10/19/2022 
-
-import json
-from tkinter import *
-from tkinter import messagebox
 import ast
 from tkinter import ttk
 wind = Tk()
@@ -20,7 +15,7 @@ heading1.place(x=35, y=10)
 
 heading = Label(frame, text='Login', fg='black', bg='white', font=('Microsoft YaHei UI Light', 24, 'bold'))
 heading.place(x=165, y=5)
- 
+
 ## LOGIN INFORMATION
 def signin():
     username=user.get()
@@ -145,7 +140,7 @@ def signin():
             
 
         Button(master, text = "Save", width="3", height = "1", command = DISPLAY).pack()
-        Button(master, text = "Load  ", width="3", height = "1", command = ACCESS_LOAD).pack()
+        Button(master, text = "load  ", width="3", height = "1", command = ACCESS_LOAD).pack()
         Button(master, text="Back", command=master.destroy).pack() #button to close the window
         Label(master, text = "Pacemaker User:  %s" % (username),font = ("Calibri", 12)).pack(side = LEFT )
         master.mainloop()
@@ -263,7 +258,7 @@ def signin():
             print("VENT PULSE WIDTH : ",PULSE_WIDTH)
             print("_____________________________________")
         Button(master, text = "Save", width="3", height = "1", command = DISPLAY).pack()
-        Button(master, text = "Load", width="3", height = "1", command = ACCESS_LOAD).pack()
+        Button(master, text = "load", width="3", height = "1", command = ACCESS_LOAD).pack()
         Button(master, text="Back", command=master.destroy).pack() #button to close the window
         Label(master, text = "Pacemaker User:  %s" % (username),font = ("Calibri", 13)).pack(side = LEFT )
 
@@ -459,7 +454,7 @@ def signin():
             print("RATESMOOTHING: ",PVARp.get())
             print("_____________________________________") 
         Button(master, text = "Save", width="3", height = "1", command = DISPLAY).pack()
-        Button(master, text = "Load", width="3", height = "1", command = ACCESS_LOAD).pack()
+        Button(master, text = "load", width="3", height = "1", command = ACCESS_LOAD).pack()
         Button(master, text="Back", command=master.destroy).pack() #button to close the window
         Label(master, text = "Pacemaker User:  %s" % (username),font = ("Calibri", 13)).pack(side = LEFT )
 
@@ -659,7 +654,7 @@ def signin():
             print("RATESMOOTHING: ",rateSmoot.get())
             print("_____________________________________")            
         Button(master, text = "Save", width="3", height = "1", command = DISPLAY).pack()
-        Button(master, text = "Load", width="3", height = "1", command = ACCESS_LOAD).pack()
+        Button(master, text = "load", width="3", height = "1", command = ACCESS_LOAD).pack()
         Button(master, text="Back", command=master.destroy).pack() #button to close the window
         Label(master, text = "Pacemaker User:  %s" % (username),font = ("Calibri", 13)).pack(side = LEFT )
 
@@ -1124,46 +1119,44 @@ def ACCESS_LOAD():
                     print("Nothing to load, save parameters first")
                     print("USER:", user.get())
                 else:
-                    
-
-              
                     VOO_LOWER_RATE = INCREMENTED["VOO"]["LRL"]
                     VOO_UPPER_RATE = INCREMENTED["VOO"]["URL"]
                     VOO_VENTRICUALAR_AMP = INCREMENTED["VOO"]["VA"]
                     VOO_VENTRICULAR_PW = INCREMENTED["VOO"]["VPW"] 
-                    print("________________________________________________________") 
-                    print("PREVIOUS VALUES FOR VOO")
-                    print("Pacemaker User:", user.get())
-                    print("LOWER RATE LIMIT:", VOO_LOWER_RATE)
-                    print("UPPER RATE LIMIT:", VOO_UPPER_RATE)
-                    print("Vent AMPLITUDE:", VOO_VENTRICUALAR_AMP)
-                    print("Vent PULSE WIDTH:", VOO_VENTRICULAR_PW) 
-                    print("________________________________________________________") 
-                    
+
                     def loaded():
                         
-                        print("________________________________________________________") 
+     
                         
                         Label(window, text = ("Pacemaker User:", user.get()), font = ("Calibri", 13)).place(x=400,y=90)
                         Label(window, text =("LOWER RATE LIMIT:", VOO_LOWER_RATE), font = ("Calibri", 13)).place(x=400,y=130)
                         Label(window, text = ("UPPER RATE LIMIT:", VOO_UPPER_RATE), font = ("Calibri", 13)).place(x=400,y=170)
                         Label(window, text =("Vent AMPLITUDE:", VOO_VENTRICUALAR_AMP), font = ("Calibri", 13)).place(x=400,y=210)
                         Label(window, text =("Vent PULSE WIDTH:", VOO_VENTRICULAR_PW), font = ("Calibri", 13)).place(x=400,y=250)
-           
-              
+                        print("________________________________________________________") 
+                        print("PREVIOUS VALUES FOR VOO")
+                        print("Pacemaker User:", user.get())
+                        print("LOWER RATE LIMIT:", VOO_LOWER_RATE)
+                        print("UPPER RATE LIMIT:", VOO_UPPER_RATE)
+                        print("Vent AMPLITUDE:", VOO_VENTRICUALAR_AMP)
+                        print("Vent PULSE WIDTH:", VOO_VENTRICULAR_PW) 
+                        print("________________________________________________________") 
+                                           
 
                     window = Tk()
                     window.geometry('925x320+300+150')
+                    Label(window, text = ("Pacemaker User:", user.get()), font = ("Calibri", 13)).place(x=400,y=90)
+                    Label(window, text =("LOWER RATE LIMIT:", VOO_LOWER_RATE), font = ("Calibri", 13)).place(x=400,y=130)
+                    Label(window, text = ("UPPER RATE LIMIT:", VOO_UPPER_RATE), font = ("Calibri", 13)).place(x=400,y=170)
+                    Label(window, text =("Vent AMPLITUDE:", VOO_VENTRICUALAR_AMP), font = ("Calibri", 13)).place(x=400,y=210)
+                    Label(window, text =("Vent PULSE WIDTH:", VOO_VENTRICULAR_PW), font = ("Calibri", 13)).place(x=400,y=250)
+                   
                     Label(window, text = "Selected Values for VOO:", font = ("Calibri", 13)).place(x=400,y=50)
-                    Button(window, text = "Show", width="4", height = "1", command = loaded).place(x=850,y=250)
+                    Button(window, text = "Confirm", width="5", height = "1", command = loaded).place(x=850,y=250)
                     Button(window, text="Edit", command=window.destroy).place(x=850,y=280) #button to close the window
 
+ 
 
-                   
-
-                    
-            
-                    
     elif SET_CURRENT_MODE=='AOO':
         f = open("data.json", "r+")
         data = json.load(f)
@@ -1177,31 +1170,41 @@ def ACCESS_LOAD():
                     AOO_UPPER_RATE = INCREMENTED["AOO"]["URL"]
                     AOO_ATRIAL_AMP = INCREMENTED["AOO"]["AA"]
                     AOO_ATRIAL_PW = INCREMENTED["AOO"]["APW"]
-                    print("________________________________________________________")  
-                    print("PREVIOUS VALUES FOR AOO")
-                    print("Pacemaker User:", user.get())
-                    print("LOWER RATE LIMIT:", AOO_LOWER_RATE)
-                    print("UPPER RATE LIMIT:", AOO_UPPER_RATE)
-                    print("ATRIAL AMPLITUDE:", AOO_ATRIAL_AMP)
-                    print("ATRIAL PULSE WIDTH:", AOO_ATRIAL_PW) 
-                    print("________________________________________________________")  
                     def loaded():
-                        
+                        print("________________________________________________________")  
+                        print("PREVIOUS VALUES FOR AOO")
+                        print("Pacemaker User:", user.get())
+                        print("LOWER RATE LIMIT:", AOO_LOWER_RATE)
+                        print("UPPER RATE LIMIT:", AOO_UPPER_RATE)
+                        print("ATRIAL AMPLITUDE:", AOO_ATRIAL_AMP)
+                        print("ATRIAL PULSE WIDTH:", AOO_ATRIAL_PW) 
                         print("________________________________________________________") 
+                        
+     
                         
                         Label(window, text = ("Pacemaker User:", user.get()), font = ("Calibri", 13)).place(x=400,y=90)
                         Label(window, text =("LOWER RATE LIMIT:", AOO_LOWER_RATE), font = ("Calibri", 13)).place(x=400,y=130)
                         Label(window, text = ("UPPER RATE LIMIT:", AOO_UPPER_RATE), font = ("Calibri", 13)).place(x=400,y=170)
-                        Label(window, text =("Vent AMPLITUDE:", AOO_ATRIAL_AMP), font = ("Calibri", 13)).place(x=400,y=210)
-                        Label(window, text =("Vent PULSE WIDTH:", AOO_ATRIAL_PW), font = ("Calibri", 13)).place(x=400,y=250)
+                        Label(window, text =("Atrial AMPLITUDE:", AOO_ATRIAL_AMP), font = ("Calibri", 13)).place(x=400,y=210)
+                        Label(window, text =("Atrial PULSE WIDTH:", AOO_ATRIAL_PW), font = ("Calibri", 13)).place(x=400,y=250)
            
               
 
                     window = Tk()
                     window.geometry('925x320+300+150')
-                    Label(window, text = "Selected Values for AOO:", font = ("Calibri", 13)).place(x=400,y=50)
-                    Button(window, text = "Show", width="4", height = "1", command = loaded).place(x=850,y=250)
+                   
+                    Label(window, text = "Selected Values for VOO:", font = ("Calibri", 13)).place(x=400,y=50)
+
+
+                    Label(window, text = ("Pacemaker User:", user.get()), font = ("Calibri", 13)).place(x=400,y=90)
+                    Label(window, text =("LOWER RATE LIMIT:", AOO_LOWER_RATE), font = ("Calibri", 13)).place(x=400,y=130)
+                    Label(window, text = ("UPPER RATE LIMIT:", AOO_UPPER_RATE), font = ("Calibri", 13)).place(x=400,y=170)
+                    Label(window, text =("Atrial AMPLITUDE:", AOO_ATRIAL_AMP), font = ("Calibri", 13)).place(x=400,y=210)
+                    Label(window, text =("Atrial PULSE WIDTH:", AOO_ATRIAL_PW), font = ("Calibri", 13)).place(x=400,y=250)
+           
+                    Button(window, text = "Confirm", width="5", height = "1", command = loaded).place(x=850,y=250)
                     Button(window, text="Edit", command=window.destroy).place(x=850,y=280) #button to close the window
+     
     elif SET_CURRENT_MODE=='VVI':
         f = open("data.json", "r+")
         data = json.load(f)
@@ -1219,18 +1222,51 @@ def ACCESS_LOAD():
                     VVI_VENTRICULAR_SENSITIVITY = INCREMENTED["VVI"]["VS"]
                     VVI_HYSTEREISIS = INCREMENTED["VVI"]["H"]
                     VVI_RATE_SMOOTHINGS = INCREMENTED["VVI"]["S"]
-                    print("________________________________________________________")
-                    print("PREVIOUS VALUES FOR VVI")
-                    print("Pacemaker User:", user.get())
-                    print("LOWER RATE LIMIT:", VVI_LOWER_RATE)
-                    print("UPPER RATE LIMIT:", VVI_UPPER_RATE)
-                    print("VENTRICULAR AMPLITUDE:", VVI_VENTRICAL_AMP)
-                    print("VENTRICULAR PULSE WIDTH:", VVI_VENTRICAL_PW)
-                    print("VENTRICULAR SENSITIVITY:", VVI_VENTRICULAR_SENSITIVITY)
-                    print("VRP:", VVI_VRP)
-                    print("HYSTERESIS:", VVI_HYSTEREISIS)
-                    print("RATE SMOOTHING:", VVI_RATE_SMOOTHINGS)
-                    print("________________________________________________________")
+                    def loaded():
+                        
+                        print("________________________________________________________")
+                        print("PREVIOUS VALUES FOR VVI")
+                        print("Pacemaker User:", user.get())
+                        print("LOWER RATE LIMIT:", VVI_LOWER_RATE)
+                        print("UPPER RATE LIMIT:", VVI_UPPER_RATE)
+                        print("VENTRICULAR AMPLITUDE:", VVI_VENTRICAL_AMP)
+                        print("VENTRICULAR PULSE WIDTH:", VVI_VENTRICAL_PW)
+                        print("VENTRICULAR SENSITIVITY:", VVI_VENTRICULAR_SENSITIVITY)
+                        print("VRP:", VVI_VRP)
+                        print("HYSTERESIS:", VVI_HYSTEREISIS)
+                        print("RATE SMOOTHING:", VVI_RATE_SMOOTHINGS)
+                        print("________________________________________________________")     
+                        
+                        Label(window, text = ("Pacemaker User:", user.get()), font = ("Calibri", 13)).place(x=400,y=40)
+                        Label(window, text =("LOWER_RATE", VVI_LOWER_RATE), font = ("Calibri", 13)).place(x=400,y=80)
+                        Label(window, text = ("UPPER RATE LIMIT:", VVI_UPPER_RATE), font = ("Calibri", 13)).place(x=400,y=120)
+                        Label(window, text =("Ventricular AMPLITUDE:", VVI_VENTRICAL_AMP), font = ("Calibri", 13)).place(x=400,y=160)
+                        Label(window, text =("Ventricular PULSE WIDTH:", VVI_VENTRICAL_PW), font = ("Calibri", 13)).place(x=400,y=200)
+                        Label(window, text =("VRP:", VVI_VRP), font = ("Calibri", 13)).place(x=400,y=240)
+                        Label(window, text =("VENTRICULAR_SENSITIVITY:", VVI_VENTRICULAR_SENSITIVITY), font = ("Calibri", 13)).place(x=400,y=280)
+                        Label(window, text =("HYSTEREISIS:", VVI_HYSTEREISIS), font = ("Calibri", 13)).place(x=400,y=320)
+                        Label(window, text =("Rate Smoothings:", VVI_RATE_SMOOTHINGS), font = ("Calibri", 13)).place(x=400,y=360)
+           
+              
+
+                    window = Tk()
+                    window.geometry('925x420+300+150')
+                    
+                    Label(window, text = "Selected Values for VOO:", font = ("Calibri", 13)).place(x=400,y=50)
+                    Label(window, text = ("Pacemaker User:", user.get()), font = ("Calibri", 13)).place(x=400,y=40)
+                    Label(window, text =("LOWER_RATE", VVI_LOWER_RATE), font = ("Calibri", 13)).place(x=400,y=80)
+                    Label(window, text = ("UPPER RATE LIMIT:", VVI_UPPER_RATE), font = ("Calibri", 13)).place(x=400,y=120)
+                    Label(window, text =("Ventricular AMPLITUDE:", VVI_VENTRICAL_AMP), font = ("Calibri", 13)).place(x=400,y=160)
+                    Label(window, text =("Ventricular PULSE WIDTH:", VVI_VENTRICAL_PW), font = ("Calibri", 13)).place(x=400,y=200)
+                    Label(window, text =("VRP:", VVI_VRP), font = ("Calibri", 13)).place(x=400,y=240)
+                    Label(window, text =("VENTRICULAR_SENSITIVITY:", VVI_VENTRICULAR_SENSITIVITY), font = ("Calibri", 13)).place(x=400,y=280)
+                    Label(window, text =("HYSTEREISIS:", VVI_HYSTEREISIS), font = ("Calibri", 13)).place(x=400,y=320)
+                    Label(window, text =("Rate Smoothings:", VVI_RATE_SMOOTHINGS), font = ("Calibri", 13)).place(x=400,y=360)
+                    
+                    Button(window, text = "Confirm", width="6", height = "1", command = loaded).place(x=850,y=250)
+                    Button(window, text="Edit", command=window.destroy).place(x=850,y=280) #button to close the window
+                    
+
     elif SET_CURRENT_MODE=='AAI':
         f = open("data.json", "r+")
         data = json.load(f)
@@ -1249,17 +1285,51 @@ def ACCESS_LOAD():
                     AAI_PVARP = INCREMENTED["AAI"]["PVARP"]
                     AAI_HYSTERESIS = INCREMENTED["AAI"]["H"]
                     AAI_RATE_SMOOTHING = INCREMENTED["AAI"]["S"]
-                    print("________________________________________________________")
-                    print("PREVIOUS VALUES FOR AAI")
-                    print("Pacemaker User:", user.get())
-                    print("LOWER RATE LIMIT:", AAI_LOWER_RATE)
-                    print("UPPER RATE LIMIT:", AAI_UPPER_RATE)
-                    print("ATRIAL AMPLITUDE:", AAI_ATRIAL_AMP)
-                    print("ATRIAL PULSE WIDTH:", AAI_APW)
-                    print("ATRIAL SENSITIVITY:", AAI_ATRIAL_SENSETIVITY)
-                    print("ARP:", AAI_ARP)
-                    print("PVARP:", AAI_PVARP)
-                    print("HYSTERESIS:", AAI_HYSTERESIS)
-                    print("RATE SMOOTHING:", AAI_RATE_SMOOTHING)
-                    print("________________________________________________________")
+
+                    def loaded():
+                        print("________________________________________________________")
+                        print("PREVIOUS VALUES FOR AAI")
+                        print("Pacemaker User:", user.get())
+                        print("LOWER RATE LIMIT:", AAI_LOWER_RATE)
+                        print("UPPER RATE LIMIT:", AAI_UPPER_RATE)
+                        print("ATRIAL AMPLITUDE:", AAI_ATRIAL_AMP)
+                        print("ATRIAL PULSE WIDTH:", AAI_APW)
+                        print("ATRIAL SENSITIVITY:", AAI_ATRIAL_SENSETIVITY)
+                        print("ARP:", AAI_ARP)
+                        print("PVARP:", AAI_PVARP)
+                        print("HYSTERESIS:", AAI_HYSTERESIS)
+                        print("RATE SMOOTHING:", AAI_RATE_SMOOTHING)
+                        print("________________________________________________________")
+                        
+                        Label(window, text = ("Pacemaker User:", user.get()), font = ("Calibri", 13)).place(x=400,y=40)
+                        Label(window, text =("LOWER_RATE",  AAI_LOWER_RATE), font = ("Calibri", 13)).place(x=400,y=80)
+                        Label(window, text = ("UPPER RATE LIMIT:", AAI_UPPER_RATE), font = ("Calibri", 13)).place(x=400,y=120)
+                        Label(window, text =("Atrial AMPLITUDE:", AAI_ATRIAL_AMP), font = ("Calibri", 13)).place(x=400,y=160)
+                        Label(window, text =("AAI_APW:", AAI_APW), font = ("Calibri", 13)).place(x=400,y=200)
+                        Label(window, text =("AAI_ARP:", AAI_ARP), font = ("Calibri", 13)).place(x=400,y=240)
+                        Label(window, text =("Atrial SENSITIVITY:", AAI_ATRIAL_SENSETIVITY), font = ("Calibri", 13)).place(x=400,y=280)
+                        Label(window, text =("PVARP:", AAI_PVARP), font = ("Calibri", 13)).place(x=400,y=300)
+                        Label(window, text =("HYSTEREISIS:", AAI_HYSTERESIS), font = ("Calibri", 13)).place(x=400,y=320)
+                        Label(window, text =("Rate Smoothings:", AAI_RATE_SMOOTHING), font = ("Calibri", 13)).place(x=400,y=360)
+           
+              
+
+                    window = Tk()
+                    window.geometry('925x420+300+150')
+
+                    Label(window, text = ("Pacemaker User:", user.get()), font = ("Calibri", 13)).place(x=400,y=40)
+                    Label(window, text =("LOWER_RATE",  AAI_LOWER_RATE), font = ("Calibri", 13)).place(x=400,y=80)
+                    Label(window, text = ("UPPER RATE LIMIT:", AAI_UPPER_RATE), font = ("Calibri", 13)).place(x=400,y=120)
+                    Label(window, text =("Atrial AMPLITUDE:", AAI_ATRIAL_AMP), font = ("Calibri", 13)).place(x=400,y=160)
+                    Label(window, text =("AAI_APW:", AAI_APW), font = ("Calibri", 13)).place(x=400,y=200)
+                    Label(window, text =("AAI_ARP:", AAI_ARP), font = ("Calibri", 13)).place(x=400,y=240)
+                    Label(window, text =("Atrial SENSITIVITY:", AAI_ATRIAL_SENSETIVITY), font = ("Calibri", 13)).place(x=400,y=280)
+                    Label(window, text =("PVARP:", AAI_PVARP), font = ("Calibri", 13)).place(x=400,y=300)
+                    Label(window, text =("HYSTEREISIS:", AAI_HYSTERESIS), font = ("Calibri", 13)).place(x=400,y=320)
+                    Label(window, text =("Rate Smoothings:", AAI_RATE_SMOOTHING), font = ("Calibri", 13)).place(x=400,y=360)
+                    
+                    Button(window, text = "Confirm", width="6", height = "1", command = loaded).place(x=850,y=250)
+                    Button(window, text="Edit", command=window.destroy).place(x=850,y=280) #button to close the window
+                    
+    
 wind.mainloop()

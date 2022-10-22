@@ -147,7 +147,7 @@ def signin():
         Button(master, text = "Save", width="3", height = "1", command = DISPLAY).pack()
         Button(master, text = "load  ", width="3", height = "1", command = ACCESS_LOAD).pack()
         Button(master, text="Back", command=master.destroy).pack() #button to close the window
-        Label(master, text = "Current USER:  %s" % (username),font = ("Calibri", 12)).pack(side = LEFT )
+        Label(master, text = "Pacemaker User:  %s" % (username),font = ("Calibri", 12)).pack(side = LEFT )
         master.mainloop()
 
         Label(master, text = "").pack()
@@ -265,7 +265,7 @@ def signin():
         Button(master, text = "Save", width="3", height = "1", command = DISPLAY).pack()
         Button(master, text = "load", width="3", height = "1", command = ACCESS_LOAD).pack()
         Button(master, text="Back", command=master.destroy).pack() #button to close the window
-        Label(master, text = "Current USER:  %s" % (username),font = ("Calibri", 13)).pack(side = LEFT )
+        Label(master, text = "Pacemaker User:  %s" % (username),font = ("Calibri", 13)).pack(side = LEFT )
 
         Label(master, text = "").pack()   
         
@@ -461,7 +461,7 @@ def signin():
         Button(master, text = "Save", width="3", height = "1", command = DISPLAY).pack()
         Button(master, text = "load", width="3", height = "1", command = ACCESS_LOAD).pack()
         Button(master, text="Back", command=master.destroy).pack() #button to close the window
-        Label(master, text = "Current USER:  %s" % (username),font = ("Calibri", 13)).pack(side = LEFT )
+        Label(master, text = "Pacemaker User:  %s" % (username),font = ("Calibri", 13)).pack(side = LEFT )
 
         Label(master, text = "").pack()
        
@@ -661,7 +661,7 @@ def signin():
         Button(master, text = "Save", width="3", height = "1", command = DISPLAY).pack()
         Button(master, text = "load", width="3", height = "1", command = ACCESS_LOAD).pack()
         Button(master, text="Back", command=master.destroy).pack() #button to close the window
-        Label(master, text = "Current USER:  %s" % (username),font = ("Calibri", 13)).pack(side = LEFT )
+        Label(master, text = "Pacemaker User:  %s" % (username),font = ("Calibri", 13)).pack(side = LEFT )
 
         Label(master, text = "").pack()
   ###############################################################
@@ -691,7 +691,8 @@ def signin():
       
 
         Button(window, width=20, pady=2, text="Logout",bg='black', fg='white', border=1, command=window.destroy).place(x=420, y=280) #button to close the window
-        Label(window, text = "Current USER:  %s" % (username),font = ("Calibri", 13)).pack(side = LEFT )
+        Label(window, text = "Pacemaker User:  %s" % (username),font = ("Calibri", 13)).pack(side = LEFT )
+        Label(window, text = "CONNECTED TO PACEMAKER",fg = 'green' ,font = 'Helvetica 9 bold').pack(side = RIGHT)
 
         
         window.mainloop()
@@ -1129,7 +1130,7 @@ def ACCESS_LOAD():
                     VOO_VENTRICULAR_PW = INCREMENTED["VOO"]["VPW"] 
                     print("________________________________________________________") 
                     print("PREVIOUS VALUES FOR VOO")
-                    print("CURRENT USER:", user.get())
+                    print("Pacemaker User:", user.get())
                     print("LOWER RATE LIMIT:", VOO_LOWER_RATE)
                     print("UPPER RATE LIMIT:", VOO_UPPER_RATE)
                     print("Vent AMPLITUDE:", VOO_VENTRICUALAR_AMP)
@@ -1150,7 +1151,7 @@ def ACCESS_LOAD():
                     AOO_ATRIAL_PW = INCREMENTED["AOO"]["APW"]
                     print("________________________________________________________")  
                     print("PREVIOUS VALUES FOR AOO")
-                    print("CURRENT USER:", user.get())
+                    print("Pacemaker User:", user.get())
                     print("LOWER RATE LIMIT:", AOO_LOWER_RATE)
                     print("UPPER RATE LIMIT:", AOO_UPPER_RATE)
                     print("ATRIAL AMPLITUDE:", AOO_ATRIAL_AMP)
@@ -1175,7 +1176,7 @@ def ACCESS_LOAD():
                     VVI_RATE_SMOOTHINGS = INCREMENTED["VVI"]["S"]
                     print("________________________________________________________")
                     print("PREVIOUS VALUES FOR VVI")
-                    print("CURRENT USER:", user.get())
+                    print("Pacemaker User:", user.get())
                     print("LOWER RATE LIMIT:", VVI_LOWER_RATE)
                     print("UPPER RATE LIMIT:", VVI_UPPER_RATE)
                     print("VENTRICULAR AMPLITUDE:", VVI_VENTRICAL_AMP)
@@ -1205,7 +1206,7 @@ def ACCESS_LOAD():
                     AAI_RATE_SMOOTHING = INCREMENTED["AAI"]["S"]
                     print("________________________________________________________")
                     print("PREVIOUS VALUES FOR AAI")
-                    print("CURRENT USER:", user.get())
+                    print("Pacemaker User:", user.get())
                     print("LOWER RATE LIMIT:", AAI_LOWER_RATE)
                     print("UPPER RATE LIMIT:", AAI_UPPER_RATE)
                     print("ATRIAL AMPLITUDE:", AAI_ATRIAL_AMP)

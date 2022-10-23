@@ -21,7 +21,7 @@ heading1.place(x=35, y=10)
 heading = Label(frame, text='Login', fg='black', bg='white', font=('Microsoft YaHei UI Light', 24, 'bold'))
 heading.place(x=165, y=5)
 
-## LOGIN INFORMATION
+## CHECK CREDENTIALS
 def signin():
     username=user.get()
     
@@ -746,7 +746,7 @@ def signin():
 ###############################################################
 ###############################################################
         ## SIGN UP POP-UP
-def registerPopup():
+def registerationPopup():
     window=Toplevel(wind)
 ##--
     window.title("Register")
@@ -766,6 +766,7 @@ def registerPopup():
 
   
             try:
+                #create text file for users
                 file = open('LOGIN_DATA.txt', 'r+')
                 d = file.read()
                 r = ast.literal_eval(d)
@@ -774,6 +775,8 @@ def registerPopup():
                 leng2 = len(password)
                 special = "_=,<>!*()-+?/@#$%^& "
                 space = " "
+                #check random inputs 
+
                 if any(c in space for c in password):
                     messagebox.showerror('Error', 'Space in password!')
                 elif (leng2 > 20):
@@ -785,7 +788,10 @@ def registerPopup():
                 elif any(c in special for c in username):
                     messagebox.showerror('Error', 'Special in user!')    
                 else: 
+                                    #append to users
+
                     if len(r) <= 10:
+                        #check capacity  users
                         r.update(dict1)
                         file.truncate(0)
                         file.close()
@@ -793,6 +799,8 @@ def registerPopup():
                         w = file.write(str(r))
                         messagebox.showerror('Success', 'Registered Successfully!')
                     else:
+                                                            
+
                         messagebox.showerror('Error', 'Capacity Reached For User!(10)')
             except:
                 file = open('LOGIN_DATA.txt', 'w')
@@ -812,6 +820,8 @@ def registerPopup():
 # #####################################
             try:
 				
+
+
                 person_data=[{"username": " ",
                     "AOO": {
                         "LowerRL": "",
@@ -819,6 +829,7 @@ def registerPopup():
                         "AA": "",
                         "AtrialPW": ""
                     },
+
                     "AAI": {
                         "LowerRL": "",
                         "UpperRL": "",
@@ -830,12 +841,14 @@ def registerPopup():
                         "H": "",
                         "S": ""
                     },
+
                     "VOO": {
                         "LowerRL": "",
                         "UpperRL": "",
                         "VA": "",
                         "VentricularPW": ""
                     },
+
                     "VVI": {
                         "LowerRL": "",
                         "UpperRL": "",
@@ -861,6 +874,7 @@ def registerPopup():
                         "AA": "",
                         "AtrialPW": ""
                     },
+
                     "AAI": {
                         "LowerRL": "",
                         "UpperRL": "",
@@ -872,12 +886,14 @@ def registerPopup():
                         "H": "",
                         "S": ""
                     },
+
                     "VOO": {
                         "LowerRL": "",
                         "UpperRL": "",
                         "VA": "",
                         "VentricularPW": ""
                     },
+
                     "VVI": {
                         "LowerRL": "",
                         "UpperRL": "",
@@ -900,7 +916,7 @@ def registerPopup():
 #######################################################################################################################
 ###################  FIELDS TO INSERTin IN REGISTER     ############################################
 ##############################################################
-    ## USERNAME FIELD
+    ## USERNAME entry place
     def INSERTin(e):
         user.delete(0, 'end')
 
@@ -910,12 +926,16 @@ def registerPopup():
 
     user = Entry(window, width=25, fg='black', border=0, bg='white', font=('Microsoft Yahei UI Light', 11))
     user.place(x=50, y=110)
+    
     user.insert(0, 'username')
+    
+
     user.bind("<FocusIn>", INSERTin)
+
     user.bind("<FocusOut>", LOGOUT)
     Frame(window, width=250, height=2, bg='black').place(x=50, y=137)
 
-    ## PASSWORD FIELD
+    ## PASSWORD entry place
     def INSERTin(e):
         passw.delete(0, 'end')
 
@@ -924,28 +944,41 @@ def registerPopup():
             passw.insert(0, 'password')
 
     passw = Entry(window, width=25, fg='black', border=0, bg='white', font=('Microsoft Yahei UI Light', 11))
+    
     passw.place(x=50, y=170)
+    
     passw.insert(0, 'password')
+    
     passw.bind("<FocusIn>", INSERTin)
+    
+    
     passw.bind("<FocusOut>", LOGOUT)
     Frame(window, width=250, height=2, bg='black').place(x=50, y=197)
+    Label(window, text="Username Cannot have: 20 characters or special characters ", fg='black', bg='white', font=('Microsoft YaHei UI Light', 10)).place(x=120, y=350)
+    Label(window, text="Password Cannot have: 20 characters or special characters", fg='black', bg='white', font=('Microsoft YaHei UI Light', 10)).place(x=120, y=385)
 
-    ## CONFIRM PASSWORD FIELD
+    ## confirm PASSWORD 
     def INSERTin(e):
+        
         passwConfirm.delete(0, 'end')
 
     def LOGOUT(e):
+        
         if passwConfirm.get() == '':
             passwConfirm.insert(0, 'Confirm Password')
 
     passwConfirm = Entry(window, width=25, fg='black', border=0, bg='white', font=('Microsoft Yahei UI Light', 11))
+    
     passwConfirm.place(x=50, y=230)
+    
     passwConfirm.insert(0, 'Confirm Password')
+    
+    
     passwConfirm.bind("<FocusIn>", INSERTin)
     passwConfirm.bind("<FocusOut>", LOGOUT)
     Frame(window, width=250, height=2, bg='black').place(x=50, y=257)
-
-    ## SIGN UP BUTTON
+   
+    ## blue sign up button
     Button(window, width=30, pady=8, text="Sign Up", bg='black', fg='white', border=0, command=register).place(x=70, y=310)
 
     window.mainloop()
@@ -953,17 +986,23 @@ def registerPopup():
 #######################################################################################################################
 ###################  FIELDS TO INSERTin IN SIGN IN    ############################################
 ##############################################################
-## USERNAME BOX
+## box for user 
 def INSERTin(e):
     user.delete(0, 'end')
 
 def LOGOUT(e):
+    
     if user.get() == '':
         user.insert(0, 'username')
 
+
 user = Entry(frame, width=36, fg='black', border=0, bg='white', font=('Microsoft YaHei UI Light', 11))
+
 user.place(x=75, y=80)
+
+
 user.insert(0, 'username')
+
 user.bind('<FocusIn>', INSERTin)
 user.bind('<FocusOut>', LOGOUT)
 Frame(frame, width=295, height=2, bg='black').place(x=70, y=110)
@@ -971,15 +1010,22 @@ Frame(frame, width=295, height=2, bg='black').place(x=70, y=110)
 
 ## PASSWORD BOX
 def INSERT1(e):
+    
     passw.delete(0, 'end')
 
 def LOGOUT1(e):
+    
     if passw.get() == '':
         passw.insert(0, 'password')
 
+
 passw = Entry(frame, width=36, fg='black', border=0, bg='white', font=('Microsoft YaHei UI Light', 11))
+
 passw.place(x=75, y=150)
+
 passw.insert(0, 'password')
+
+
 passw.bind('<FocusIn>', INSERT1)
 passw.bind('<FocusOut>', LOGOUT1)
 Frame(frame, width=295, height=2, bg='black').place(x=70, y=180)
@@ -987,8 +1033,8 @@ Frame(frame, width=295, height=2, bg='black').place(x=70, y=180)
 ## SIGN IN BUTTON
 Button(frame, width=30, pady=8, text='Sign in', bg='black', fg='white', border=0,command=signin).place(x=110, y=225)
 # SIGN UP
-Label(frame, text="Don't have an account ?", fg='black', bg='white', font=('Microsoft YaHei UI Light', 10)).place(x=120, y=265)
-Button(frame, width=6, text='Sign up', border=0, bg='white', cursor='hand2', fg='#57a1f8',command=registerPopup).place(x=270,y=267)
+Label(frame, text="New user? Register here", fg='black', bg='white', font=('Microsoft YaHei UI Light', 10)).place(x=120, y=265)
+Button(frame, width=6, text='Sign up', border=0, bg='white', cursor='hand2', fg='#57a1f8',command=registerationPopup).place(x=270,y=267)
 
 ###############################################################
 ###############################################################
@@ -1012,20 +1058,29 @@ Button(frame, width=6, text='Sign up', border=0, bg='white', cursor='hand2', fg=
 
 
 def SET_VALS():
+
+    #check mode 
     if SET_CURRENT_MODE=='AOO':
+        
         AOO_LOWER_RATE= LOWER_RATE_LIMIT
+        
         AOO_UPPER_RATE= str(UPPER_RATE_LIMIT.get())
+        
         AOO_ATRIAL_AMP= B_AMPLITUDE
+        
         AOO_ATRIAL_PW= PULSE_WIDTH
         
         #CHECK IF LOWER BIGGER THAN UPPER
 
         if int(LOWER_RATE_LIMIT) >= UPPER_RATE_LIMIT.get():
-            messagebox.showwarning('LowerRL cannot exceed UpperRL')
+            messagebox.showwarning('ERROR','LowerRate cannot exceed UpperRate')
         else:
             messagebox.showinfo('Saved','SAVED')
+            
             f = open("inputs.json", "r+")
+            
             data = json.load(f)
+            ## add to json file 
             for INCREMENTED in data:
                 if INCREMENTED["username"] == user.get():
                     INCREMENTED["AOO"]["LowerRL"] = AOO_LOWER_RATE
@@ -1037,19 +1092,27 @@ def SET_VALS():
             )
     elif SET_CURRENT_MODE=='AAI':
         AAI_LOWER_RATE=LOWER_RATE_LIMIT
+        
         AAI_UPPER_RATE=str(UPPER_RATE_LIMIT.get())
+        
         AAI_ATRIAL_AMP=B_AMPLITUDE
+        
         AAI_AtrialPW=PULSE_WIDTH
+        
         AAI_ARP=ARP_VRP
+        
         AAI_ATRIAL_SENSETIVITY= atrSENS
+        
         AAI_PVARP= str(PVARp.get()) 
+        
         AAI_HYSTERESIS= Hyster
+        
         AAI_RATE_SMOOTHING= str(rateSmoot.get())
 
 
         
         if int(LOWER_RATE_LIMIT) >= UPPER_RATE_LIMIT.get():
-            messagebox.showwarning('LowerRL cannot exceed UpperRL')
+            messagebox.showwarning('ERROR','LowerRate cannot exceed UpperRate')
         else:
             messagebox.showinfo('Saved','SAVED')
             f = open("inputs.json", "r+")
@@ -1074,7 +1137,7 @@ def SET_VALS():
         VOO_VENTRICUALAR_AMP=B_AMPLITUDE
         VOO_VENTRICULAR_PW=PULSE_WIDTH
         if int(LOWER_RATE_LIMIT) >= UPPER_RATE_LIMIT.get():
-            messagebox.showwarning('LowerRL cannot exceed UpperRL')
+            messagebox.showwarning('ERROR','LowerRate cannot exceed UpperRate')
         else:
             messagebox.showinfo('Saved','SAVED')
             f = open("inputs.json", "r+")
@@ -1099,7 +1162,7 @@ def SET_VALS():
         VVI_HYSTEREISIS=Hyster
         VVI_RATE_SMOOTHINGS=str(rateSmoot.get())
         if int(LOWER_RATE_LIMIT) >= UPPER_RATE_LIMIT.get():
-            messagebox.showwarning('LowerRL cannot exceed UpperRL')
+            messagebox.showwarning('ERROR','LowerRate cannot exceed UpperRate')
         else:
             messagebox.showinfo('Saved','SAVED')
             f = open("inputs.json", "r+")
@@ -1135,15 +1198,18 @@ def SET_VALS():
 ###############################################################
 ###############################################################
 def ACCESS_LOAD():
+    #check the mode 
     if SET_CURRENT_MODE=='VOO':
         f = open("inputs.json", "r+")
         data = json.load(f)
         for INCREMENTED in data:
             if INCREMENTED["username"] == user.get():
+                #check if empty
                 if INCREMENTED["VOO"]["UpperRL"] == "":
                     print("Nothing to load, save parameters first")
                     print("USER:", user.get())
                 else:
+                    #iterate through to display in loaded 
                     VOO_LOWER_RATE = INCREMENTED["VOO"]["LowerRL"]
                     VOO_UPPER_RATE = INCREMENTED["VOO"]["UpperRL"]
                     VOO_VENTRICUALAR_AMP = INCREMENTED["VOO"]["VA"]

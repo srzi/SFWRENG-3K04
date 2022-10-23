@@ -134,13 +134,13 @@ def signin():
             B_AMPLITUDE = list1.get()
             PULSE_WIDTH = list2.get()
             SET_VALS()
-            print("_____________________________________")
-            print("The values for AOO :")
-            print("LOWER RATE LIMIT : ",LOWER_RATE_LIMIT)
-            print("UPPER RATE LIMIT : ", UPPER_RATE_LIMIT.get()) 
-            print("ATTIAL AMPLITUDE : ",B_AMPLITUDE)
-            print("ATRIAL PULSE WIDTH : ",PULSE_WIDTH)
-            print("_____________________________________")
+            # print("_____________________________________")
+            # print("The values for AOO :")
+            # print("LOWER RATE LIMIT : ",LOWER_RATE_LIMIT)
+            # print("UPPER RATE LIMIT : ", UPPER_RATE_LIMIT.get()) 
+            # print("ATTIAL AMPLITUDE : ",B_AMPLITUDE)
+            # print("ATRIAL PULSE WIDTH : ",PULSE_WIDTH)
+            # print("_____________________________________")
             
             
 
@@ -255,13 +255,13 @@ def signin():
             B_AMPLITUDE = list1.get()
             PULSE_WIDTH = list2.get()
             SET_VALS()
-            print("_____________________________________")
-            print("The values for VOO :")
-            print("LOWER RATE LIMIT : ",LOWER_RATE_LIMIT)
-            print("UPPER RATE LIMIT : ", UPPER_RATE_LIMIT.get()) 
-            print("VENT AMPLITUDE : ",B_AMPLITUDE)
-            print("VENT PULSE WIDTH : ",PULSE_WIDTH)
-            print("_____________________________________")
+            # print("_____________________________________")
+            # print("The values for VOO :")
+            # print("LOWER RATE LIMIT : ",LOWER_RATE_LIMIT)
+            # print("UPPER RATE LIMIT : ", UPPER_RATE_LIMIT.get()) 
+            # print("VENT AMPLITUDE : ",B_AMPLITUDE)
+            # print("VENT PULSE WIDTH : ",PULSE_WIDTH)
+            # print("_____________________________________")
         Button(master, text = "Save", width="3", height = "1", command = DISPLAY).pack()
         Button(master, text = "load", width="3", height = "1", command = ACCESS_LOAD).pack()
         Button(master, text="Back", command=master.destroy).pack() #button to close the window
@@ -446,18 +446,18 @@ def signin():
             atrSENS = list4.get()
             Hyster=list5.get()
             SET_VALS()
-            print("_____________________________________")
-            print("The values for AAI :")
-            print("LOWER RATE LIMIT : ",LOWER_RATE_LIMIT)
-            print("UPPER RATE LIMIT : ", UPPER_RATE_LIMIT.get()) 
-            print("ATRIAL AMPLITUDE : ",B_AMPLITUDE)
-            print("ATRIAL PULSE WIDTH : ",PULSE_WIDTH)
-            print(" ARP : ",ARP_VRP)
-            print("ATRIAL SENSITIVITY : ", atrSENS) 
-            print("HYSTERESIS : ",Hyster)
-            print("RATESMOOTHING: ",rateSmoot.get())
-            print("RATESMOOTHING: ",PVARp.get())
-            print("_____________________________________") 
+            # print("_____________________________________")
+            # print("The values for AAI :")
+            # print("LOWER RATE LIMIT : ",LOWER_RATE_LIMIT)
+            # print("UPPER RATE LIMIT : ", UPPER_RATE_LIMIT.get()) 
+            # print("ATRIAL AMPLITUDE : ",B_AMPLITUDE)
+            # print("ATRIAL PULSE WIDTH : ",PULSE_WIDTH)
+            # print(" ARP : ",ARP_VRP)
+            # print("ATRIAL SENSITIVITY : ", atrSENS) 
+            # print("HYSTERESIS : ",Hyster)
+            # print("RATESMOOTHING: ",rateSmoot.get())
+            # print("RATESMOOTHING: ",PVARp.get())
+            # print("_____________________________________") 
         Button(master, text = "Save", width="3", height = "1", command = DISPLAY).pack()
         Button(master, text = "load", width="3", height = "1", command = ACCESS_LOAD).pack()
         Button(master, text="Back", command=master.destroy).pack() #button to close the window
@@ -647,17 +647,17 @@ def signin():
             VentSENS = list4.get()
             Hyster=list5.get()
             SET_VALS()
-            print("_____________________________________")
-            print("The values for VVI :")
-            print("LOWER RATE LIMIT : ",LOWER_RATE_LIMIT)
-            print("UPPER RATE LIMIT : ", UPPER_RATE_LIMIT.get()) 
-            print("VENT AMPLITUDE : ",B_AMPLITUDE)
-            print("VENT PULSE WIDTH : ",PULSE_WIDTH)
-            print(" VRP : ",ARP_VRP)
-            print("VENT SENSITIVITY : ", VentSENS) 
-            print("HYSTERESIS : ",Hyster)
-            print("RATESMOOTHING: ",rateSmoot.get())
-            print("_____________________________________")            
+            # print("_____________________________________")
+            # print("The values for VVI :")
+            # print("LOWER RATE LIMIT : ",LOWER_RATE_LIMIT)
+            # print("UPPER RATE LIMIT : ", UPPER_RATE_LIMIT.get()) 
+            # print("VENT AMPLITUDE : ",B_AMPLITUDE)
+            # print("VENT PULSE WIDTH : ",PULSE_WIDTH)
+            # print(" VRP : ",ARP_VRP)
+            # print("VENT SENSITIVITY : ", VentSENS) 
+            # print("HYSTERESIS : ",Hyster)
+            # print("RATESMOOTHING: ",rateSmoot.get())
+            # print("_____________________________________")            
         Button(master, text = "Save", width="3", height = "1", command = DISPLAY).pack()
         Button(master, text = "load", width="3", height = "1", command = ACCESS_LOAD).pack()
         Button(master, text="Back", command=master.destroy).pack() #button to close the window
@@ -1023,6 +1023,7 @@ def SET_VALS():
         if int(LOWER_RATE_LIMIT) >= UPPER_RATE_LIMIT.get():
             messagebox.showwarning('LRL cannot exceed URL')
         else:
+            messagebox.showinfo('SAVED')
             f = open("data.json", "r+")
             data = json.load(f)
             for INCREMENTED in data:
@@ -1050,6 +1051,7 @@ def SET_VALS():
         if int(LOWER_RATE_LIMIT) >= UPPER_RATE_LIMIT.get():
             messagebox.showwarning('LRL cannot exceed URL')
         else:
+            messagebox.showinfo('SAVED')
             f = open("data.json", "r+")
             data = json.load(f)
             for INCREMENTED in data:
@@ -1074,6 +1076,7 @@ def SET_VALS():
         if int(LOWER_RATE_LIMIT) >= UPPER_RATE_LIMIT.get():
             messagebox.showwarning('LRL cannot exceed URL')
         else:
+            messagebox.showinfo('SAVED')
             f = open("data.json", "r+")
             data = json.load(f)
             for INCREMENTED in data:
@@ -1098,6 +1101,7 @@ def SET_VALS():
         if int(LOWER_RATE_LIMIT) >= UPPER_RATE_LIMIT.get():
             messagebox.showwarning('LRL cannot exceed URL')
         else:
+            messagebox.showinfo('SAVED')
             f = open("data.json", "r+")
             data = json.load(f)
             for INCREMENTED in data:

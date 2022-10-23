@@ -28,7 +28,7 @@ def signin():
     password=passw.get()
 
     
-    file = open('sign.txt', 'r')
+    file = open('LOGIN_DATA.txt', 'r')
     
     d = file.read()
     
@@ -394,7 +394,7 @@ def signin():
         
         
         Label(master, text = "Hystereisis").pack()
-        CHOICES5 = ["OFF","Same as LRL"]
+        CHOICES5 = ["OFF","Same as LowerRL"]
         choice5 = DoubleVar()
         choice5.set(CHOICES5[0])
         list5 = ttk.Combobox(master, value= CHOICES5)
@@ -605,7 +605,7 @@ def signin():
 
 
         Label(master, text = "Hystereisis").pack()
-        CHOICES5 = ["OFF","Same as LRL"]
+        CHOICES5 = ["OFF","Same as LowerRL"]
         choice5 = DoubleVar()
         choice5.set(CHOICES5[0])
         list5 = ttk.Combobox(master, value= CHOICES5)
@@ -766,7 +766,7 @@ def registerPopup():
 
   
             try:
-                file = open('sign.txt', 'r+')
+                file = open('LOGIN_DATA.txt', 'r+')
                 d = file.read()
                 r = ast.literal_eval(d)
                 dict1 = {username: password}
@@ -789,13 +789,13 @@ def registerPopup():
                         r.update(dict1)
                         file.truncate(0)
                         file.close()
-                        file = open('sign.txt', 'w')
+                        file = open('LOGIN_DATA.txt', 'w')
                         w = file.write(str(r))
                         messagebox.showerror('Success', 'Registered Successfully!')
                     else:
-                        messagebox.showerror('Error', 'User Capacity Reached!')
+                        messagebox.showerror('Error', 'Capacity Reached For User!(10)')
             except:
-                file = open('sign.txt', 'w')
+                file = open('LOGIN_DATA.txt', 'w')
                 pp = str({'username': 'password'})
                 file.write(pp)
                 file.close()
@@ -814,16 +814,16 @@ def registerPopup():
 				
                 person_data=[{"username": " ",
                     "AOO": {
-                        "LRL": "",
-                        "URL": "",
+                        "LowerRL": "",
+                        "UpperRL": "",
                         "AA": "",
-                        "APW": ""
+                        "AtrialPW": ""
                     },
                     "AAI": {
-                        "LRL": "",
-                        "URL": "",
+                        "LowerRL": "",
+                        "UpperRL": "",
                         "AA": "",
-                        "APW": "",
+                        "AtrialPW": "",
                         "ARP": "",
                         "AS": "",
                         "PVARP": "",
@@ -831,41 +831,41 @@ def registerPopup():
                         "S": ""
                     },
                     "VOO": {
-                        "LRL": "",
-                        "URL": "",
+                        "LowerRL": "",
+                        "UpperRL": "",
                         "VA": "",
-                        "VPW": ""
+                        "VentricularPW": ""
                     },
                     "VVI": {
-                        "LRL": "",
-                        "URL": "",
+                        "LowerRL": "",
+                        "UpperRL": "",
                         "VA": "",
-                        "VPW": "",
+                        "VentricularPW": "",
                         "VRP": "",
                         "VS": "",
                         "H": "",
                         "S": ""
                     }}]
-                with open('data.json','w') as f:
+                with open('inputs.json','w') as f:
                     json.dump(person_data,f,indent=4)
                 f.close()
 ###########################################################################NEW ADDITION TO FILE 
-                f = open("data.json", "r+")
+                f = open("inputs.json", "r+")
                 
                 data = json.load(f)
                 
                 NEW_USER_DATA = {"username": f"{username}",
                     "AOO": {
-                        "LRL": "",
-                        "URL": "",
+                        "LowerRL": "",
+                        "UpperRL": "",
                         "AA": "",
-                        "APW": ""
+                        "AtrialPW": ""
                     },
                     "AAI": {
-                        "LRL": "",
-                        "URL": "",
+                        "LowerRL": "",
+                        "UpperRL": "",
                         "AA": "",
-                        "APW": "",
+                        "AtrialPW": "",
                         "ARP": "",
                         "AS": "",
                         "PVARP": "",
@@ -873,16 +873,16 @@ def registerPopup():
                         "S": ""
                     },
                     "VOO": {
-                        "LRL": "",
-                        "URL": "",
+                        "LowerRL": "",
+                        "UpperRL": "",
                         "VA": "",
-                        "VPW": ""
+                        "VentricularPW": ""
                     },
                     "VVI": {
-                        "LRL": "",
-                        "URL": "",
+                        "LowerRL": "",
+                        "UpperRL": "",
                         "VA": "",
-                        "VPW": "",
+                        "VentricularPW": "",
                         "VRP": "",
                         "VS": "",
                         "H": "",
@@ -893,7 +893,7 @@ def registerPopup():
                 json.dump(data, f, indent=4)
                 f.close()
             except:
-                messagebox.showerror("Error!","Error in json or txt files! Please clear them and try again")
+                messagebox.showerror("Error in json")
         else:
             messagebox.showerror('Error', 'Passwords do not match!')
 
@@ -1021,25 +1021,25 @@ def SET_VALS():
         #CHECK IF LOWER BIGGER THAN UPPER
 
         if int(LOWER_RATE_LIMIT) >= UPPER_RATE_LIMIT.get():
-            messagebox.showwarning('LRL cannot exceed URL')
+            messagebox.showwarning('LowerRL cannot exceed UpperRL')
         else:
-            messagebox.showinfo('SAVED')
-            f = open("data.json", "r+")
+            messagebox.showinfo('Saved','SAVED')
+            f = open("inputs.json", "r+")
             data = json.load(f)
             for INCREMENTED in data:
                 if INCREMENTED["username"] == user.get():
-                    INCREMENTED["AOO"]["LRL"] = AOO_LOWER_RATE
-                    INCREMENTED["AOO"]["URL"] = AOO_UPPER_RATE
+                    INCREMENTED["AOO"]["LowerRL"] = AOO_LOWER_RATE
+                    INCREMENTED["AOO"]["UpperRL"] = AOO_UPPER_RATE
                     INCREMENTED["AOO"]["AA"] = AOO_ATRIAL_AMP
-                    INCREMENTED["AOO"]["APW"] = AOO_ATRIAL_PW
-            open("data.json", "w").write(
+                    INCREMENTED["AOO"]["AtrialPW"] = AOO_ATRIAL_PW
+            open("inputs.json", "w").write(
                 json.dumps(data, indent=4, separators=(',', ': '))
             )
     elif SET_CURRENT_MODE=='AAI':
         AAI_LOWER_RATE=LOWER_RATE_LIMIT
         AAI_UPPER_RATE=str(UPPER_RATE_LIMIT.get())
         AAI_ATRIAL_AMP=B_AMPLITUDE
-        AAI_APW=PULSE_WIDTH
+        AAI_AtrialPW=PULSE_WIDTH
         AAI_ARP=ARP_VRP
         AAI_ATRIAL_SENSETIVITY= atrSENS
         AAI_PVARP= str(PVARp.get()) 
@@ -1049,23 +1049,23 @@ def SET_VALS():
 
         
         if int(LOWER_RATE_LIMIT) >= UPPER_RATE_LIMIT.get():
-            messagebox.showwarning('LRL cannot exceed URL')
+            messagebox.showwarning('LowerRL cannot exceed UpperRL')
         else:
-            messagebox.showinfo('SAVED')
-            f = open("data.json", "r+")
+            messagebox.showinfo('Saved','SAVED')
+            f = open("inputs.json", "r+")
             data = json.load(f)
             for INCREMENTED in data:
                 if INCREMENTED["username"] == user.get():
-                    INCREMENTED["AAI"]["LRL"] = AAI_LOWER_RATE
-                    INCREMENTED["AAI"]["URL"] = AAI_UPPER_RATE
+                    INCREMENTED["AAI"]["LowerRL"] = AAI_LOWER_RATE
+                    INCREMENTED["AAI"]["UpperRL"] = AAI_UPPER_RATE
                     INCREMENTED["AAI"]["AA"] = AAI_ATRIAL_AMP
-                    INCREMENTED["AAI"]["APW"] = AAI_APW
+                    INCREMENTED["AAI"]["AtrialPW"] = AAI_AtrialPW
                     INCREMENTED["AAI"]["ARP"] = AAI_ARP
                     INCREMENTED["AAI"]["AS"] = AAI_ATRIAL_SENSETIVITY
                     INCREMENTED["AAI"]["PVARP"] = AAI_PVARP
                     INCREMENTED["AAI"]["H"] = AAI_HYSTERESIS
                     INCREMENTED["AAI"]["S"] = AAI_RATE_SMOOTHING
-            open("data.json", "w").write(
+            open("inputs.json", "w").write(
                 json.dumps(data, indent=4, separators=(',', ': '))
             )
     elif SET_CURRENT_MODE=='VOO':
@@ -1074,18 +1074,18 @@ def SET_VALS():
         VOO_VENTRICUALAR_AMP=B_AMPLITUDE
         VOO_VENTRICULAR_PW=PULSE_WIDTH
         if int(LOWER_RATE_LIMIT) >= UPPER_RATE_LIMIT.get():
-            messagebox.showwarning('LRL cannot exceed URL')
+            messagebox.showwarning('LowerRL cannot exceed UpperRL')
         else:
-            messagebox.showinfo('SAVED')
-            f = open("data.json", "r+")
+            messagebox.showinfo('Saved','SAVED')
+            f = open("inputs.json", "r+")
             data = json.load(f)
             for INCREMENTED in data:
                 if INCREMENTED["username"] == user.get():
-                    INCREMENTED["VOO"]["LRL"] = VOO_LOWER_RATE
-                    INCREMENTED["VOO"]["URL"] = VOO_UPPER_RATE
+                    INCREMENTED["VOO"]["LowerRL"] = VOO_LOWER_RATE
+                    INCREMENTED["VOO"]["UpperRL"] = VOO_UPPER_RATE
                     INCREMENTED["VOO"]["VA"] = VOO_VENTRICUALAR_AMP
-                    INCREMENTED["VOO"]["VPW"] = VOO_VENTRICULAR_PW
-            open("data.json", "w").write(
+                    INCREMENTED["VOO"]["VentricularPW"] = VOO_VENTRICULAR_PW
+            open("inputs.json", "w").write(
                 json.dumps(data, indent=4, separators=(',', ': '))
             )
     elif SET_CURRENT_MODE=='VVI':
@@ -1099,22 +1099,22 @@ def SET_VALS():
         VVI_HYSTEREISIS=Hyster
         VVI_RATE_SMOOTHINGS=str(rateSmoot.get())
         if int(LOWER_RATE_LIMIT) >= UPPER_RATE_LIMIT.get():
-            messagebox.showwarning('LRL cannot exceed URL')
+            messagebox.showwarning('LowerRL cannot exceed UpperRL')
         else:
-            messagebox.showinfo('SAVED')
-            f = open("data.json", "r+")
+            messagebox.showinfo('Saved','SAVED')
+            f = open("inputs.json", "r+")
             data = json.load(f)
             for INCREMENTED in data:
                 if INCREMENTED["username"] == user.get():
-                    INCREMENTED["VVI"]["LRL"] = VVI_LOWER_RATE
-                    INCREMENTED["VVI"]["URL"] = VVI_UPPER_RATE
+                    INCREMENTED["VVI"]["LowerRL"] = VVI_LOWER_RATE
+                    INCREMENTED["VVI"]["UpperRL"] = VVI_UPPER_RATE
                     INCREMENTED["VVI"]["VA"] = VVI_VENTRICAL_AMP
-                    INCREMENTED["VVI"]["VPW"] = VVI_VENTRICAL_PW
+                    INCREMENTED["VVI"]["VentricularPW"] = VVI_VENTRICAL_PW
                     INCREMENTED["VVI"]["VRP"] = VVI_VRP
                     INCREMENTED["VVI"]["VS"] = VVI_VENTRICULAR_SENSITIVITY
                     INCREMENTED["VVI"]["H"] = VVI_HYSTEREISIS
                     INCREMENTED["VVI"]["S"] = VVI_RATE_SMOOTHINGS
-            open("data.json", "w").write(
+            open("inputs.json", "w").write(
                 json.dumps(data, indent=4, separators=(',', ': '))
             )
 
@@ -1136,18 +1136,18 @@ def SET_VALS():
 ###############################################################
 def ACCESS_LOAD():
     if SET_CURRENT_MODE=='VOO':
-        f = open("data.json", "r+")
+        f = open("inputs.json", "r+")
         data = json.load(f)
         for INCREMENTED in data:
             if INCREMENTED["username"] == user.get():
-                if INCREMENTED["VOO"]["URL"] == "":
+                if INCREMENTED["VOO"]["UpperRL"] == "":
                     print("Nothing to load, save parameters first")
                     print("USER:", user.get())
                 else:
-                    VOO_LOWER_RATE = INCREMENTED["VOO"]["LRL"]
-                    VOO_UPPER_RATE = INCREMENTED["VOO"]["URL"]
+                    VOO_LOWER_RATE = INCREMENTED["VOO"]["LowerRL"]
+                    VOO_UPPER_RATE = INCREMENTED["VOO"]["UpperRL"]
                     VOO_VENTRICUALAR_AMP = INCREMENTED["VOO"]["VA"]
-                    VOO_VENTRICULAR_PW = INCREMENTED["VOO"]["VPW"] 
+                    VOO_VENTRICULAR_PW = INCREMENTED["VOO"]["VentricularPW"] 
 
                     def loaded():
                         
@@ -1183,18 +1183,18 @@ def ACCESS_LOAD():
  
 
     elif SET_CURRENT_MODE=='AOO':
-        f = open("data.json", "r+")
+        f = open("inputs.json", "r+")
         data = json.load(f)
         for INCREMENTED in data:
             if INCREMENTED["username"] == user.get():
-                if INCREMENTED["AOO"]["URL"] == "":
+                if INCREMENTED["AOO"]["UpperRL"] == "":
                     print("Nothing to load, save parameters first")
                     print("USER:", user.get())
                 else:
-                    AOO_LOWER_RATE = INCREMENTED["AOO"]["LRL"]
-                    AOO_UPPER_RATE = INCREMENTED["AOO"]["URL"]
+                    AOO_LOWER_RATE = INCREMENTED["AOO"]["LowerRL"]
+                    AOO_UPPER_RATE = INCREMENTED["AOO"]["UpperRL"]
                     AOO_ATRIAL_AMP = INCREMENTED["AOO"]["AA"]
-                    AOO_ATRIAL_PW = INCREMENTED["AOO"]["APW"]
+                    AOO_ATRIAL_PW = INCREMENTED["AOO"]["AtrialPW"]
                     def loaded():
                         print("________________________________________________________")  
                         print("PREVIOUS VALUES FOR AOO")
@@ -1231,18 +1231,18 @@ def ACCESS_LOAD():
                     Button(window, text="Edit", command=window.destroy).place(x=850,y=280) #button to close the window
      
     elif SET_CURRENT_MODE=='VVI':
-        f = open("data.json", "r+")
+        f = open("inputs.json", "r+")
         data = json.load(f)
         for INCREMENTED in data:
             if INCREMENTED["username"] == user.get():
-                if INCREMENTED["VVI"]["URL"] == "":
+                if INCREMENTED["VVI"]["UpperRL"] == "":
                     print("Nothing to load, save parameters first")
                     print("USER:", user.get())
                 else:
-                    VVI_LOWER_RATE = INCREMENTED["VVI"]["LRL"]
-                    VVI_UPPER_RATE = INCREMENTED["VVI"]["URL"]
+                    VVI_LOWER_RATE = INCREMENTED["VVI"]["LowerRL"]
+                    VVI_UPPER_RATE = INCREMENTED["VVI"]["UpperRL"]
                     VVI_VENTRICAL_AMP = INCREMENTED["VVI"]["VA"]
-                    VVI_VENTRICAL_PW = INCREMENTED["VVI"]["VPW"]
+                    VVI_VENTRICAL_PW = INCREMENTED["VVI"]["VentricularPW"]
                     VVI_VRP = INCREMENTED["VVI"]["VRP"]
                     VVI_VENTRICULAR_SENSITIVITY = INCREMENTED["VVI"]["VS"]
                     VVI_HYSTEREISIS = INCREMENTED["VVI"]["H"]
@@ -1293,18 +1293,18 @@ def ACCESS_LOAD():
                     
 
     elif SET_CURRENT_MODE=='AAI':
-        f = open("data.json", "r+")
+        f = open("inputs.json", "r+")
         data = json.load(f)
         for INCREMENTED in data:
             if INCREMENTED["username"] == user.get():
-                if INCREMENTED["AAI"]["URL"] == "":
+                if INCREMENTED["AAI"]["UpperRL"] == "":
                     print("Nothing to load, save parameters first")
                     print("USER:", user.get())
                 else:
-                    AAI_LOWER_RATE = INCREMENTED["AAI"]["LRL"]
-                    AAI_UPPER_RATE = INCREMENTED["AAI"]["URL"]
+                    AAI_LOWER_RATE = INCREMENTED["AAI"]["LowerRL"]
+                    AAI_UPPER_RATE = INCREMENTED["AAI"]["UpperRL"]
                     AAI_ATRIAL_AMP = INCREMENTED["AAI"]["AA"]
-                    AAI_APW = INCREMENTED["AAI"]["APW"]
+                    AAI_AtrialPW = INCREMENTED["AAI"]["AtrialPW"]
                     AAI_ARP = INCREMENTED["AAI"]["ARP"]
                     AAI_ATRIAL_SENSETIVITY = INCREMENTED["AAI"]["AS"]
                     AAI_PVARP = INCREMENTED["AAI"]["PVARP"]
@@ -1318,7 +1318,7 @@ def ACCESS_LOAD():
                         print("LOWER RATE LIMIT:", AAI_LOWER_RATE)
                         print("UPPER RATE LIMIT:", AAI_UPPER_RATE)
                         print("ATRIAL AMPLITUDE:", AAI_ATRIAL_AMP)
-                        print("ATRIAL PULSE WIDTH:", AAI_APW)
+                        print("ATRIAL PULSE WIDTH:", AAI_AtrialPW)
                         print("ATRIAL SENSITIVITY:", AAI_ATRIAL_SENSETIVITY)
                         print("ARP:", AAI_ARP)
                         print("PVARP:", AAI_PVARP)
@@ -1330,7 +1330,7 @@ def ACCESS_LOAD():
                         Label(window, text =("LOWER_RATE",  AAI_LOWER_RATE), font = ("Calibri", 13)).place(x=400,y=80)
                         Label(window, text = ("UPPER RATE LIMIT:", AAI_UPPER_RATE), font = ("Calibri", 13)).place(x=400,y=120)
                         Label(window, text =("Atrial AMPLITUDE:", AAI_ATRIAL_AMP), font = ("Calibri", 13)).place(x=400,y=160)
-                        Label(window, text =("AAI_APW:", AAI_APW), font = ("Calibri", 13)).place(x=400,y=200)
+                        Label(window, text =("AAI_AtrialPW:", AAI_AtrialPW), font = ("Calibri", 13)).place(x=400,y=200)
                         Label(window, text =("AAI_ARP:", AAI_ARP), font = ("Calibri", 13)).place(x=400,y=240)
                         Label(window, text =("Atrial SENSITIVITY:", AAI_ATRIAL_SENSETIVITY), font = ("Calibri", 13)).place(x=400,y=280)
                         Label(window, text =("PVARP:", AAI_PVARP), font = ("Calibri", 13)).place(x=400,y=300)
@@ -1346,7 +1346,7 @@ def ACCESS_LOAD():
                     Label(window, text =("LOWER_RATE",  AAI_LOWER_RATE), font = ("Calibri", 13)).place(x=400,y=80)
                     Label(window, text = ("UPPER RATE LIMIT:", AAI_UPPER_RATE), font = ("Calibri", 13)).place(x=400,y=120)
                     Label(window, text =("Atrial AMPLITUDE:", AAI_ATRIAL_AMP), font = ("Calibri", 13)).place(x=400,y=160)
-                    Label(window, text =("AAI_APW:", AAI_APW), font = ("Calibri", 13)).place(x=400,y=200)
+                    Label(window, text =("AAI_AtrialPW:", AAI_AtrialPW), font = ("Calibri", 13)).place(x=400,y=200)
                     Label(window, text =("AAI_ARP:", AAI_ARP), font = ("Calibri", 13)).place(x=400,y=240)
                     Label(window, text =("Atrial SENSITIVITY:", AAI_ATRIAL_SENSETIVITY), font = ("Calibri", 13)).place(x=400,y=280)
                     Label(window, text =("PVARP:", AAI_PVARP), font = ("Calibri", 13)).place(x=400,y=300)

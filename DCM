@@ -1017,17 +1017,23 @@ def SET_VALS():
         AOO_UPPER_RATE= str(UPPER_RATE_LIMIT.get())
         AOO_ATRIAL_AMP= B_AMPLITUDE
         AOO_ATRIAL_PW= PULSE_WIDTH
-        f = open("data.json", "r+")
-        data = json.load(f)
-        for INCREMENTED in data:
-            if INCREMENTED["username"] == user.get():
-                INCREMENTED["AOO"]["LRL"] = AOO_LOWER_RATE
-                INCREMENTED["AOO"]["URL"] = AOO_UPPER_RATE
-                INCREMENTED["AOO"]["AA"] = AOO_ATRIAL_AMP
-                INCREMENTED["AOO"]["APW"] = AOO_ATRIAL_PW
-        open("data.json", "w").write(
-            json.dumps(data, indent=4, separators=(',', ': '))
-        )
+        
+        #CHECK IF LOWER BIGGER THAN UPPER
+
+        if int(LOWER_RATE_LIMIT) >= UPPER_RATE_LIMIT.get():
+            messagebox.showwarning('LRL cannot exceed URL')
+        else:
+            f = open("data.json", "r+")
+            data = json.load(f)
+            for INCREMENTED in data:
+                if INCREMENTED["username"] == user.get():
+                    INCREMENTED["AOO"]["LRL"] = AOO_LOWER_RATE
+                    INCREMENTED["AOO"]["URL"] = AOO_UPPER_RATE
+                    INCREMENTED["AOO"]["AA"] = AOO_ATRIAL_AMP
+                    INCREMENTED["AOO"]["APW"] = AOO_ATRIAL_PW
+            open("data.json", "w").write(
+                json.dumps(data, indent=4, separators=(',', ': '))
+            )
     elif SET_CURRENT_MODE=='AAI':
         AAI_LOWER_RATE=LOWER_RATE_LIMIT
         AAI_UPPER_RATE=str(UPPER_RATE_LIMIT.get())
@@ -1039,38 +1045,46 @@ def SET_VALS():
         AAI_HYSTERESIS= Hyster
         AAI_RATE_SMOOTHING= str(rateSmoot.get())
 
-        f = open("data.json", "r+")
-        data = json.load(f)
-        for INCREMENTED in data:
-            if INCREMENTED["username"] == user.get():
-                INCREMENTED["AAI"]["LRL"] = AAI_LOWER_RATE
-                INCREMENTED["AAI"]["URL"] = AAI_UPPER_RATE
-                INCREMENTED["AAI"]["AA"] = AAI_ATRIAL_AMP
-                INCREMENTED["AAI"]["APW"] = AAI_APW
-                INCREMENTED["AAI"]["ARP"] = AAI_ARP
-                INCREMENTED["AAI"]["AS"] = AAI_ATRIAL_SENSETIVITY
-                INCREMENTED["AAI"]["PVARP"] = AAI_PVARP
-                INCREMENTED["AAI"]["H"] = AAI_HYSTERESIS
-                INCREMENTED["AAI"]["S"] = AAI_RATE_SMOOTHING
-        open("data.json", "w").write(
-            json.dumps(data, indent=4, separators=(',', ': '))
-        )
+
+        
+        if int(LOWER_RATE_LIMIT) >= UPPER_RATE_LIMIT.get():
+            messagebox.showwarning('LRL cannot exceed URL')
+        else:
+            f = open("data.json", "r+")
+            data = json.load(f)
+            for INCREMENTED in data:
+                if INCREMENTED["username"] == user.get():
+                    INCREMENTED["AAI"]["LRL"] = AAI_LOWER_RATE
+                    INCREMENTED["AAI"]["URL"] = AAI_UPPER_RATE
+                    INCREMENTED["AAI"]["AA"] = AAI_ATRIAL_AMP
+                    INCREMENTED["AAI"]["APW"] = AAI_APW
+                    INCREMENTED["AAI"]["ARP"] = AAI_ARP
+                    INCREMENTED["AAI"]["AS"] = AAI_ATRIAL_SENSETIVITY
+                    INCREMENTED["AAI"]["PVARP"] = AAI_PVARP
+                    INCREMENTED["AAI"]["H"] = AAI_HYSTERESIS
+                    INCREMENTED["AAI"]["S"] = AAI_RATE_SMOOTHING
+            open("data.json", "w").write(
+                json.dumps(data, indent=4, separators=(',', ': '))
+            )
     elif SET_CURRENT_MODE=='VOO':
         VOO_LOWER_RATE=LOWER_RATE_LIMIT
         VOO_UPPER_RATE=str(UPPER_RATE_LIMIT.get())
         VOO_VENTRICUALAR_AMP=B_AMPLITUDE
         VOO_VENTRICULAR_PW=PULSE_WIDTH
-        f = open("data.json", "r+")
-        data = json.load(f)
-        for INCREMENTED in data:
-            if INCREMENTED["username"] == user.get():
-                INCREMENTED["VOO"]["LRL"] = VOO_LOWER_RATE
-                INCREMENTED["VOO"]["URL"] = VOO_UPPER_RATE
-                INCREMENTED["VOO"]["VA"] = VOO_VENTRICUALAR_AMP
-                INCREMENTED["VOO"]["VPW"] = VOO_VENTRICULAR_PW
-        open("data.json", "w").write(
-            json.dumps(data, indent=4, separators=(',', ': '))
-        )
+        if int(LOWER_RATE_LIMIT) >= UPPER_RATE_LIMIT.get():
+            messagebox.showwarning('LRL cannot exceed URL')
+        else:
+            f = open("data.json", "r+")
+            data = json.load(f)
+            for INCREMENTED in data:
+                if INCREMENTED["username"] == user.get():
+                    INCREMENTED["VOO"]["LRL"] = VOO_LOWER_RATE
+                    INCREMENTED["VOO"]["URL"] = VOO_UPPER_RATE
+                    INCREMENTED["VOO"]["VA"] = VOO_VENTRICUALAR_AMP
+                    INCREMENTED["VOO"]["VPW"] = VOO_VENTRICULAR_PW
+            open("data.json", "w").write(
+                json.dumps(data, indent=4, separators=(',', ': '))
+            )
     elif SET_CURRENT_MODE=='VVI':
         
         VVI_LOWER_RATE=LOWER_RATE_LIMIT
@@ -1081,22 +1095,24 @@ def SET_VALS():
         VVI_VENTRICULAR_SENSITIVITY=VentSENS
         VVI_HYSTEREISIS=Hyster
         VVI_RATE_SMOOTHINGS=str(rateSmoot.get())
-
-        f = open("data.json", "r+")
-        data = json.load(f)
-        for INCREMENTED in data:
-            if INCREMENTED["username"] == user.get():
-                INCREMENTED["VVI"]["LRL"] = VVI_LOWER_RATE
-                INCREMENTED["VVI"]["URL"] = VVI_UPPER_RATE
-                INCREMENTED["VVI"]["VA"] = VVI_VENTRICAL_AMP
-                INCREMENTED["VVI"]["VPW"] = VVI_VENTRICAL_PW
-                INCREMENTED["VVI"]["VRP"] = VVI_VRP
-                INCREMENTED["VVI"]["VS"] = VVI_VENTRICULAR_SENSITIVITY
-                INCREMENTED["VVI"]["H"] = VVI_HYSTEREISIS
-                INCREMENTED["VVI"]["S"] = VVI_RATE_SMOOTHINGS
-        open("data.json", "w").write(
-            json.dumps(data, indent=4, separators=(',', ': '))
-        )
+        if int(LOWER_RATE_LIMIT) >= UPPER_RATE_LIMIT.get():
+            messagebox.showwarning('LRL cannot exceed URL')
+        else:
+            f = open("data.json", "r+")
+            data = json.load(f)
+            for INCREMENTED in data:
+                if INCREMENTED["username"] == user.get():
+                    INCREMENTED["VVI"]["LRL"] = VVI_LOWER_RATE
+                    INCREMENTED["VVI"]["URL"] = VVI_UPPER_RATE
+                    INCREMENTED["VVI"]["VA"] = VVI_VENTRICAL_AMP
+                    INCREMENTED["VVI"]["VPW"] = VVI_VENTRICAL_PW
+                    INCREMENTED["VVI"]["VRP"] = VVI_VRP
+                    INCREMENTED["VVI"]["VS"] = VVI_VENTRICULAR_SENSITIVITY
+                    INCREMENTED["VVI"]["H"] = VVI_HYSTEREISIS
+                    INCREMENTED["VVI"]["S"] = VVI_RATE_SMOOTHINGS
+            open("data.json", "w").write(
+                json.dumps(data, indent=4, separators=(',', ': '))
+            )
 
 ###############################################################
 ###############################################################

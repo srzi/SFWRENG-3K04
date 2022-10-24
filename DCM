@@ -1,5 +1,11 @@
-#10/19/2022 
+#!/usr/bin/env python
+# coding: utf-8
 
+# In[ ]:
+
+
+#10/23/2022 
+#BY AHMED ABDELHALIM 400313465 abdela55 / SARA ARMANZI 400324304 armanazs
 import json
 from tkinter import *
 from tkinter import messagebox
@@ -120,6 +126,7 @@ def signin():
             B_AMPLITUDE = list1.get()
             PULSE_WIDTH = list2.get()
             SET_VALS()
+            Label(master, text = "Your values have been saved", font = ("Calibri", 13)).place(x=350,y=400)
 
         Button(master, text = "Save", width="3", height = "1", command = DISPLAY).pack()
         Button(master, text = "load", width="3", height = "1", command = ACCESS_LOAD).pack()
@@ -232,6 +239,7 @@ def signin():
             B_AMPLITUDE = list1.get()
             PULSE_WIDTH = list2.get()
             SET_VALS()
+            Label(master, text = "Your values have been saved", font = ("Calibri", 13)).place(x=350,y=400)
             # print("_____________________________________")
             # print("The values for VOO :")
             # print("LOWER RATE LIMIT : ",LOWER_RATE_LIMIT)
@@ -423,6 +431,7 @@ def signin():
             atrSENS = list4.get()
             Hyster=list5.get()
             SET_VALS()
+            Label(master, text = "Your values have been saved", font = ("Calibri", 13)).place(x=350,y=820)
             # print("_____________________________________")
             # print("The values for AAI :")
             # print("LOWER RATE LIMIT : ",LOWER_RATE_LIMIT)
@@ -624,6 +633,7 @@ def signin():
             VentSENS = list4.get()
             Hyster=list5.get()
             SET_VALS()
+            Label(master, text = "Your values have been saved", font = ("Calibri", 13)).place(x=350,y=670)
             # print("_____________________________________")
             # print("The values for VVI :")
             # print("LOWER RATE LIMIT : ",LOWER_RATE_LIMIT)
@@ -738,7 +748,7 @@ def registerPopup():
         username = user.get()
         password = passw.get()
         passwordConfirm = passwConfirm.get()
-        specialc = "!@#$%^&*()-+?=,<>/ "
+        specialc = """#$%&'()*!+,-."/:;<=>?@[\]^_`{|}~"""""
         lengUser = len(username)
         lengPass = len(password)
         space = " "
@@ -988,7 +998,8 @@ def SET_VALS():
         if int(LOWER_RATE_LIMIT) >= UPPER_RATE_LIMIT.get():
             messagebox.showwarning('ERROR','LowerRate cannot exceed UpperRate')
         else:
-            messagebox.showinfo('Saved','SAVED')
+            
+            
             
             f = open("IMPORT.json", "r+")
             
@@ -1027,7 +1038,7 @@ def SET_VALS():
         if int(LOWER_RATE_LIMIT) >= UPPER_RATE_LIMIT.get():
             messagebox.showwarning('ERROR','LowerRate cannot exceed UpperRate')
         else:
-            messagebox.showinfo('Saved','SAVED')
+          
             f = open("IMPORT.json", "r+")
             data = json.load(f)
             for INCREMENTED in data:
@@ -1052,7 +1063,7 @@ def SET_VALS():
         if int(LOWER_RATE_LIMIT) >= UPPER_RATE_LIMIT.get():
             messagebox.showwarning('ERROR','LowerRate cannot exceed UpperRate')
         else:
-            messagebox.showinfo('Saved','SAVED')
+          
             f = open("IMPORT.json", "r+")
             data = json.load(f)
             for INCREMENTED in data:
@@ -1077,7 +1088,7 @@ def SET_VALS():
         if int(LOWER_RATE_LIMIT) >= UPPER_RATE_LIMIT.get():
             messagebox.showwarning('ERROR','LowerRate cannot exceed UpperRate')
         else:
-            messagebox.showinfo('Saved','SAVED')
+           
             f = open("IMPORT.json", "r+")
             data = json.load(f)
             for INCREMENTED in data:
@@ -1197,7 +1208,7 @@ def ACCESS_LOAD():
                     window = Tk()
                     window.geometry('925x320+300+150')
                    
-                    Label(window, text = "Selected Values for VOO:", font = ("Calibri", 13)).place(x=400,y=50)
+                    Label(window, text = "Selected Values for AOO:", font = ("Calibri", 13)).place(x=400,y=50)
 
 
                     Label(window, text = ("Pacemaker User:", user.get()), font = ("Calibri", 13)).place(x=400,y=90)
@@ -1254,9 +1265,9 @@ def ACCESS_LOAD():
               
 
                     window = Tk()
-                    window.geometry('925x420+300+150')
+                    window.geometry('925x520+300+150')
                     
-                    Label(window, text = "Selected Values for VOO:", font = ("Calibri", 13)).place(x=400,y=50)
+                    Label(window, text = "Selected Values for VVI:", font = ("Calibri", 13)).place(x=400,y=60)
                     Label(window, text = ("Pacemaker User:", user.get()), font = ("Calibri", 13)).place(x=400,y=40)
                     Label(window, text =("LOWER_RATE", VVI_LOWER_RATE), font = ("Calibri", 13)).place(x=400,y=80)
                     Label(window, text = ("UPPER RATE LIMIT:", VVI_UPPER_RATE), font = ("Calibri", 13)).place(x=400,y=120)
@@ -1319,9 +1330,10 @@ def ACCESS_LOAD():
               
 
                     window = Tk()
-                    window.geometry('925x420+300+150')
+                    window.geometry('925x520+300+150')
 
                     Label(window, text = ("Pacemaker User:", user.get()), font = ("Calibri", 13)).place(x=400,y=40)
+                    Label(window, text = "Selected Values for AAI:", font = ("Calibri", 13)).place(x=400,y=60)
                     Label(window, text =("LOWER_RATE",  AAI_LOWER_RATE), font = ("Calibri", 13)).place(x=400,y=80)
                     Label(window, text = ("UPPER RATE LIMIT:", AAI_UPPER_RATE), font = ("Calibri", 13)).place(x=400,y=120)
                     Label(window, text =("Atrial AMPLITUDE:", AAI_ATRIAL_AMP), font = ("Calibri", 13)).place(x=400,y=160)
@@ -1337,3 +1349,4 @@ def ACCESS_LOAD():
                     
     
 wind.mainloop()
+

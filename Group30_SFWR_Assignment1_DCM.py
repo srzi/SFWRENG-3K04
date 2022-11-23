@@ -3,8 +3,8 @@
 
 # In[ ]:
 
-//ASS1 working 
-#10/23/2022 
+#pw = ***, modes screen destroyed and returned, corresponding parameters for each mode done
+#11/17/2022
 #BY AHMED ABDELHALIM 400313465 abdela55 / SARA ARMANZI 400324304 armanazs
 import json
 from tkinter import *
@@ -12,6 +12,8 @@ from tkinter import messagebox
 import ast
 from tkinter import ttk
 from tokenize import Special
+import serial
+
 wind = Tk()
 wind.title("Login")
 wind.geometry('925x500+300+150')
@@ -28,23 +30,28 @@ heading1.place(x=35, y=10)
 heading = Label(frame, text='Login', fg='black', bg='white', font=('Microsoft YaHei UI Light', 23, 'bold'))
 heading.place(x=165, y=5)
 
+
+
+
 ## LOGIN CHECKER
 def signin():
     username=user.get()
     password=passw.get()
+
+    
 
     file = open('LOGIN_DATA.txt', 'r')
     d = file.read()
     r = ast.literal_eval(d)
     file.close()
 ###############################################################
-
            #                  MODES                   
 
 ###############################################################
      
     def AOO(): #function when button is clicked   
-
+        window.destroy()
+        
         global master
         master = Tk()
         master.geometry("800x600+300+100")
@@ -116,7 +123,37 @@ def signin():
         list2.bind("<<ComboboxSelected>>")
         list2.pack()
         Label(master, text = "").pack()
-           
+
+        
+        def connect2():
+            global window
+            window = Tk()
+            window.geometry('925x320+300+150')
+            
+            Label(window, text = "Please select your mode:", font = ("Calibri", 13)).place(x=400,y=10)
+
+        #############################################BUTTONS FOR MODES
+
+            button2 = Button(window,width=20, pady=6,  text= "1.    AOO",bg='white', fg='black', border=1,command=AOO).place(x=300,y=40) #input button
+            
+            button3 = Button(window,width=20, pady=6,  text= "2.    VVI",bg='white', fg='black', border=1,command=VVI).place(x=300,y=100) #input button
+
+            button4 = Button(window,width=20, pady=6,  text= "3.    VOO",bg='white', fg='black', border=1,command=VOO).place(x=300,y=160) #input button
+
+            button5 = Button(window,width=20, pady=6, text= "4.     AAI",bg='white', fg='black', border=1,command=AAI).place(x=300,y=220) #input button
+            
+            button6 = Button(window,width=20, pady=6, text= "5.     AOOR",bg='white', fg='black', border=1,command=AOOR).place(x=460,y=40) #input button
+            button7 = Button(window,width=20, pady=6, text= "6.     VOOR",bg='white', fg='black', border=1,command=VOOR).place(x=460,y=100) #input button       
+            button8 = Button(window,width=20, pady=6, text= "7.     AAIR",bg='white', fg='black', border=1,command=AAIR).place(x=460,y=160) #input button
+            button9 = Button(window,width=20, pady=6, text= "8.     VVIR",bg='white', fg='black', border=1,command=VVIR).place(x=460,y=220) #input button
+            Button(window, width=20, pady=2, text="Logout",bg='black', fg='white', border=1, command=window.destroy).place(x=400, y=280) #button to close the window
+            Label(window, text = "Pacemaker User:  %s" % (username),font = ("Calibri", 13)).pack(side = LEFT )
+            Label(window, text = "CONNECTED TO PACEMAKER",fg = 'green' ,font = 'Helvetica 9 bold').pack(side = RIGHT)
+
+            master.destroy()
+
+            
+            window.mainloop()
         def DISPLAY():
             global LOWER_RATE_LIMIT
             global UPPER_RATE_LIMIT
@@ -129,12 +166,14 @@ def signin():
             Label(master, text = "Your values have been saved", font = ("Calibri", 13)).place(x=350,y=400)
 
         Button(master, text = "Save", width="3", height = "1", command = DISPLAY).pack()
-        Button(master, text = "load", width="3", height = "1", command = ACCESS_LOAD).pack()
-        Button(master, text="Back", command=master.destroy).pack() #button to close the window
+        Button(master, text = "Load", width="3", height = "1", command = ACCESS_LOAD).pack()
+        Button(master, text="Back", command= connect2).pack() #button to close the window
         Label(master, text = "Pacemaker User:  %s" % (username),font = ("Calibri", 12)).pack(side = LEFT )
         master.mainloop()
 
         Label(master, text = "").pack()
+
+
    ###############################################################
 ##############################################################
 # 
@@ -144,6 +183,7 @@ def signin():
         
         
     def VOO(): #function when button is clicked   
+        window.destroy()
 
         global master
         master = Tk()
@@ -228,6 +268,36 @@ def signin():
         list2.pack()
         Label(master, text = "").pack()
         
+        def connect2():
+            global window
+            window = Tk()
+            window.geometry('925x320+300+150')
+            
+            Label(window, text = "Please select your mode:", font = ("Calibri", 13)).place(x=400,y=10)
+
+        #############################################BUTTONS FOR MODES
+
+            button2 = Button(window,width=20, pady=6,  text= "1.    AOO",bg='white', fg='black', border=1,command=AOO).place(x=300,y=40) #input button
+            
+            button3 = Button(window,width=20, pady=6,  text= "2.    VVI",bg='white', fg='black', border=1,command=VVI).place(x=300,y=100) #input button
+
+            button4 = Button(window,width=20, pady=6,  text= "3.    VOO",bg='white', fg='black', border=1,command=VOO).place(x=300,y=160) #input button
+
+            button5 = Button(window,width=20, pady=6, text= "4.     AAI",bg='white', fg='black', border=1,command=AAI).place(x=300,y=220) #input button
+            
+            button6 = Button(window,width=20, pady=6, text= "5.     AOOR",bg='white', fg='black', border=1,command=AOOR).place(x=460,y=40) #input button
+            button7 = Button(window,width=20, pady=6, text= "6.     VOOR",bg='white', fg='black', border=1,command=VOOR).place(x=460,y=100) #input button       
+            button8 = Button(window,width=20, pady=6, text= "7.     AAIR",bg='white', fg='black', border=1,command=AAIR).place(x=460,y=160) #input button
+            button9 = Button(window,width=20, pady=6, text= "8.     VVIR",bg='white', fg='black', border=1,command=VVIR).place(x=460,y=220) #input button
+            Button(window, width=20, pady=2, text="Logout",bg='black', fg='white', border=1, command=window.destroy).place(x=400, y=280) #button to close the window
+            Label(window, text = "Pacemaker User:  %s" % (username),font = ("Calibri", 13)).pack(side = LEFT )
+            Label(window, text = "CONNECTED TO PACEMAKER",fg = 'green' ,font = 'Helvetica 9 bold').pack(side = RIGHT)
+
+            master.destroy()
+
+            
+            window.mainloop()
+        
         
         
         def DISPLAY():
@@ -248,8 +318,8 @@ def signin():
             # print("VENT PULSE WIDTH : ",PULSE_WIDTH)
             # print("_____________________________________")
         Button(master, text = "Save", width="3", height = "1", command = DISPLAY).pack()
-        Button(master, text = "load", width="3", height = "1", command = ACCESS_LOAD).pack()
-        Button(master, text="Back", command=master.destroy).pack() #button to close the window
+        Button(master, text = "Load", width="3", height = "1", command = ACCESS_LOAD).pack()
+        Button(master, text="Back", command=connect2).pack() #button to close the window
         Label(master, text = "Pacemaker User:  %s" % (username),font = ("Calibri", 13)).pack(side = LEFT )
 
         Label(master, text = "").pack()   
@@ -263,7 +333,8 @@ def signin():
 # 
 # 
 #    
-    def AAI(): #function when button is clicked   
+    def AAI(): #function when button is clicked 
+        window.destroy() ##added in each function to close modes window, back reopens  
         global SET_CURRENT_MODE
         SET_CURRENT_MODE = 'AAI'
         global master
@@ -407,8 +478,36 @@ def signin():
         PVARp.pack()
         PVARp.set(250)
         Label(master, text = "").pack()
-        
+        def connect2():
+            global window
+            window = Tk()
+            window.geometry('925x320+300+150')
+            
+            Label(window, text = "Please select your mode:", font = ("Calibri", 13)).place(x=400,y=10)
 
+        #############################################BUTTONS FOR MODES
+
+            button2 = Button(window,width=20, pady=6,  text= "1.    AOO",bg='white', fg='black', border=1,command=AOO).place(x=300,y=40) #input button
+            
+            button3 = Button(window,width=20, pady=6,  text= "2.    VVI",bg='white', fg='black', border=1,command=VVI).place(x=300,y=100) #input button
+
+            button4 = Button(window,width=20, pady=6,  text= "3.    VOO",bg='white', fg='black', border=1,command=VOO).place(x=300,y=160) #input button
+
+            button5 = Button(window,width=20, pady=6, text= "4.     AAI",bg='white', fg='black', border=1,command=AAI).place(x=300,y=220) #input button
+            
+            button6 = Button(window,width=20, pady=6, text= "5.     AOOR",bg='white', fg='black', border=1,command=AOOR).place(x=460,y=40) #input button
+            button7 = Button(window,width=20, pady=6, text= "6.     VOOR",bg='white', fg='black', border=1,command=VOOR).place(x=460,y=100) #input button       
+            button8 = Button(window,width=20, pady=6, text= "7.     AAIR",bg='white', fg='black', border=1,command=AAIR).place(x=460,y=160) #input button
+            button9 = Button(window,width=20, pady=6, text= "8.     VVIR",bg='white', fg='black', border=1,command=VVIR).place(x=460,y=220) #input button
+            Button(window, width=20, pady=2, text="Logout",bg='black', fg='white', border=1, command=window.destroy).place(x=400, y=280) #button to close the window
+            Label(window, text = "Pacemaker User:  %s" % (username),font = ("Calibri", 13)).pack(side = LEFT )
+            Label(window, text = "CONNECTED TO PACEMAKER",fg = 'green' ,font = 'Helvetica 9 bold').pack(side = RIGHT)
+
+            master.destroy()
+
+            
+            window.mainloop()
+        
 
         def DISPLAY():
             global LOWER_RATE_LIMIT
@@ -445,8 +544,8 @@ def signin():
             # print("RATESMOOTHING: ",PVARp.get())
             # print("_____________________________________") 
         Button(master, text = "Save", width="3", height = "1", command = DISPLAY).pack()
-        Button(master, text = "load", width="3", height = "1", command = ACCESS_LOAD).pack()
-        Button(master, text="Back", command=master.destroy).pack() #button to close the window
+        Button(master, text = "Load", width="3", height = "1", command = ACCESS_LOAD).pack()
+        Button(master, text="Back", command=connect2).pack() #button to close the window
         Label(master, text = "Pacemaker User:  %s" % (username),font = ("Calibri", 13)).pack(side = LEFT )
 
         Label(master, text = "").pack()
@@ -459,6 +558,7 @@ def signin():
 #    
         
     def VVI(): #function when button is clicked   
+        window.destroy()
         global SET_CURRENT_MODE
         SET_CURRENT_MODE = 'VVI'
         global master
@@ -554,8 +654,6 @@ def signin():
 
 
 
-
-
         Label(master, text = "VRP(ms)").pack()
         CHOICES3 = [
             "150","160","170","180","190","200","210","220","230","240","250","260","270","280","290","300","310","320","330","340","350","360","370","380","390","400","410","420","430","440","450","460","470","480","490","500",
@@ -614,8 +712,36 @@ def signin():
         Label(master, text = "").pack()
 
 
+        def connect2():  #function for back button (reopen modes window)
+            global window
+            window = Tk()
+            window.geometry('925x320+300+150')
+            
+            Label(window, text = "Please select your mode:", font = ("Calibri", 13)).place(x=400,y=10)
 
+        #############################################BUTTONS FOR MODES
 
+            button2 = Button(window,width=20, pady=6,  text= "1.    AOO",bg='white', fg='black', border=1,command=AOO).place(x=300,y=40) #input button
+            
+            button3 = Button(window,width=20, pady=6,  text= "2.    VVI",bg='white', fg='black', border=1,command=VVI).place(x=300,y=100) #input button
+
+            button4 = Button(window,width=20, pady=6,  text= "3.    VOO",bg='white', fg='black', border=1,command=VOO).place(x=300,y=160) #input button
+
+            button5 = Button(window,width=20, pady=6, text= "4.     AAI",bg='white', fg='black', border=1,command=AAI).place(x=300,y=220) #input button
+            
+            button6 = Button(window,width=20, pady=6, text= "5.     AOOR",bg='white', fg='black', border=1,command=AOOR).place(x=460,y=40) #input button
+            button7 = Button(window,width=20, pady=6, text= "6.     VOOR",bg='white', fg='black', border=1,command=VOOR).place(x=460,y=100) #input button       
+            button8 = Button(window,width=20, pady=6, text= "7.     AAIR",bg='white', fg='black', border=1,command=AAIR).place(x=460,y=160) #input button
+            button9 = Button(window,width=20, pady=6, text= "8.     VVIR",bg='white', fg='black', border=1,command=VVIR).place(x=460,y=220) #input button
+            Button(window, width=20, pady=2, text="Logout",bg='black', fg='white', border=1, command=window.destroy).place(x=400, y=280) #button to close the window
+            Label(window, text = "Pacemaker User:  %s" % (username),font = ("Calibri", 13)).pack(side = LEFT )
+            Label(window, text = "CONNECTED TO PACEMAKER",fg = 'green' ,font = 'Helvetica 9 bold').pack(side = RIGHT)
+
+            master.destroy()
+
+            
+            window.mainloop()
+        
 
         def DISPLAY():
             global LOWER_RATE_LIMIT
@@ -646,43 +772,811 @@ def signin():
             # print("RATESMOOTHING: ",rateSmoot.get())
             # print("_____________________________________")            
         Button(master, text = "Save", width="3", height = "1", command = DISPLAY).pack()
-        Button(master, text = "load", width="3", height = "1", command = ACCESS_LOAD).pack()
-        Button(master, text="Back", command=master.destroy).pack() #button to close the window
+        Button(master, text = "Load", width="3", height = "1", command = ACCESS_LOAD).pack()
+        Button(master, text="Back", command=connect2).pack() #button to close the window
         Label(master, text = "Pacemaker User:  %s" % (username),font = ("Calibri", 13)).pack(side = LEFT )
 
         Label(master, text = "").pack()
+        
+        
+    def AOOR(): #function when button is clicked  
+        window.destroy() ### 
+        global SET_CURRENT_MODE
+        SET_CURRENT_MODE = 'AOOR'
+        global master
+        master = Tk()
+        master.geometry("900x800+300+100")
+        master.title("AOOR")
+        global LOWER_RATE_LIMIT
+        global UPPER_RATE_LIMIT
+        global Max_Sensor_Rate
+        global B_AMPLITUDE
+        global PULSE_WIDTH
+        global ATR_TH
+        global REACTION_T
+        global RESPONSE_F
+        global RECOVERY_T
+
+        Label(master, text = "SET VALUES BELOW", font = ("Calibri", 13)).pack()
+        Label(master, text = "").pack()
+
+        Label(master, text = "Lower Rate Limit (ppm)").pack()
+        CHOICES = [
+            "30","35","40","45","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70",
+            "70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89",
+            "90","95","105","110","115","120","125","130","135","140","145","150","155","160","165","170","175",
+        ]
+        choice = DoubleVar()
+        choice.set(CHOICES[0])
+        list = ttk.Combobox(master, value= CHOICES)
+        list.current(14)
+        list.bind("<<ComboboxSelected>>")
+        list.pack() 
+        Label(master, text = "").pack()
+
+
+        Label(master, text = "Upper Rate Limit (ppm)").pack()
+        UPPER_RATE_LIMIT = Scale(master, from_=50, to =175, resolution=5, orient=HORIZONTAL)
+        UPPER_RATE_LIMIT.set(120)
+
+        UPPER_RATE_LIMIT.pack()
+        Label(master, text = "").pack()
+        
+        Label(master, text = "Maximum Sensor Rate (ppm)").pack()
+        Max_Sensor_Rate = Scale(master, from_=50, to =175, resolution=5, orient=HORIZONTAL)
+        Max_Sensor_Rate.set(120)
+
+        Max_Sensor_Rate.pack()
+        Label(master, text = "").pack()
+
+        Label(master, text = "Atrial Amplitude (V)").pack()
+        CHOICES1 = [
+            "0","0.5","0.6","0.7","0.8","0.9","1.0","1.1","1.2","1.3","1.4","1.5","1.6","1.7","1.8","1.9","2.0",
+            "2.1","2.2","2.3","2.4","2.5","2.6","2.7","2.8","2.9","3.0","3.1","3.2","3.5","4.0","4.5","5.0","5.5",
+            "6.0","6.5","7.0","7.5",
+        ]
+        choice1 = DoubleVar()
+        choice1.set(CHOICES1[0])
+        list1 = ttk.Combobox(master, value= CHOICES1)
+        list1.current(29)
+        list1.bind("<<ComboboxSelected>>")
+        list1.pack()
+        Label(master, text = "").pack()
+
+
+
+        Label(master, text = "Atrial Pulse Width (ms)").pack()
+        CHOICES2 = [
+            "0.05","0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","0.9","1.0","1.1","1.2","1.3","1.4","1.5","1.6","1.7","1.8","1.9",
+        ]
+        choice2 = DoubleVar()
+        choice2.set(CHOICES2[0])
+        list2 = ttk.Combobox(master, value= CHOICES2)
+        list2.current(4)
+        list2.bind("<<ComboboxSelected>>")
+        list2.pack()
+        Label(master, text = "").pack()
+        
+
+        Label(master, text = "Activity Threshold").pack()
+        CHOICES3 = ["V-Low","Low","Med-Low","Med","Med-High","High","V-High"]
+        choice3 = DoubleVar()
+        choice3.set(CHOICES3[0])
+        list3 = ttk.Combobox(master, value= CHOICES3)
+        list3.current(0)
+        list3.bind("<<ComboboxSelected>>")
+        list3.pack()
+        Label(master, text = "").pack() 
+        
+        Label(master, text = "Reaction Time (s)").pack()
+        Reaction_Time = Scale(master, from_=10, to =50, resolution=10, orient=HORIZONTAL)
+        Reaction_Time.set(120)
+
+        Reaction_Time.pack()
+        Label(master, text = "").pack()
+
+        
+        Label(master, text = "Response Factor (min)").pack()
+        Response_Factor = Scale(master, from_=1, to =16, resolution=1, orient=HORIZONTAL)
+        Response_Factor.set(120)
+
+        Response_Factor.pack()
+        Label(master, text = "").pack()
+
+
+        Label(master, text = "Recovery Time (min)").pack()
+        Response_time = Scale(master, from_=2, to =16, resolution=1, orient=HORIZONTAL)
+        Response_time.set(120)
+        Response_time.pack()
+        Label(master, text = "").pack()
+        def connect2():
+            global window
+            window = Tk()
+            window.geometry('925x320+300+150')
+            
+            Label(window, text = "Please select your mode:", font = ("Calibri", 13)).place(x=400,y=10)
+
+        #############################################BUTTONS FOR MODES
+
+            button2 = Button(window,width=20, pady=6,  text= "1.    AOO",bg='white', fg='black', border=1,command=AOO).place(x=300,y=40) #input button
+            
+            button3 = Button(window,width=20, pady=6,  text= "2.    VVI",bg='white', fg='black', border=1,command=VVI).place(x=300,y=100) #input button
+
+            button4 = Button(window,width=20, pady=6,  text= "3.    VOO",bg='white', fg='black', border=1,command=VOO).place(x=300,y=160) #input button
+
+            button5 = Button(window,width=20, pady=6, text= "4.     AAI",bg='white', fg='black', border=1,command=AAI).place(x=300,y=220) #input button
+            
+            button6 = Button(window,width=20, pady=6, text= "5.     AOOR",bg='white', fg='black', border=1,command=AOOR).place(x=460,y=40) #input button
+            button7 = Button(window,width=20, pady=6, text= "6.     VOOR",bg='white', fg='black', border=1,command=VOOR).place(x=460,y=100) #input button       
+            button8 = Button(window,width=20, pady=6, text= "7.     AAIR",bg='white', fg='black', border=1,command=AAIR).place(x=460,y=160) #input button
+            button9 = Button(window,width=20, pady=6, text= "8.     VVIR",bg='white', fg='black', border=1,command=VVIR).place(x=460,y=220) #input button
+            Button(window, width=20, pady=2, text="Logout",bg='black', fg='white', border=1, command=window.destroy).place(x=400, y=280) #button to close the window
+            Label(window, text = "Pacemaker User:  %s" % (username),font = ("Calibri", 13)).pack(side = LEFT )
+            Label(window, text = "CONNECTED TO PACEMAKER",fg = 'green' ,font = 'Helvetica 9 bold').pack(side = RIGHT)
+
+            master.destroy()
+
+            
+            window.mainloop()
+        
+        
+        def DISPLAY():
+            global LOWER_RATE_LIMIT
+            global UPPER_RATE_LIMIT
+            global Max_Sensor_Rate
+            global B_AMPLITUDE
+            global PULSE_WIDTH
+            global ATR_TH
+            global REACTION_T
+            global RESPONSE_F
+            global RECOVERY_T
+            
+            
+            LOWER_RATE_LIMIT = list.get()
+            B_AMPLITUDE = list1.get()
+            PULSE_WIDTH = list2.get()
+            ATR_TH = list3.get()
+            
+
+            SET_VALS()
+            Label(master, text = "Your values have been saved", font = ("Calibri", 13)).place(x=480,y=720)
+          
+        Button(master, text = "Save", width="3", height = "1", command = DISPLAY).pack()
+        Button(master, text = "Load", width="3", height = "1", command = ACCESS_LOAD).pack()
+        Button(master, text="Back", command=connect2).pack() #button to close the window
+        Label(master, text = "Pacemaker User:  %s" % (username),font = ("Calibri", 13)).pack(side = LEFT )
+        Label(master, text = "").pack()
+
+
+
+        
+    def VOOR(): #function when button is clicked   
+        window.destroy()
+        global SET_CURRENT_MODE
+        SET_CURRENT_MODE = 'AOOR'
+        global master
+        master = Tk()
+        master.geometry("900x800+300+100")
+        master.title("VOOR")
+        global LOWER_RATE_LIMIT
+        global UPPER_RATE_LIMIT
+        global Max_Sensor_Rate
+        global B_AMPLITUDE
+        global PULSE_WIDTH
+        global ATR_TH
+        global REACTION_T
+        global RESPONSE_F
+        global RECOVERY_T
+
+        Label(master, text = "SET VALUES BELOW", font = ("Calibri", 13)).pack()
+        Label(master, text = "").pack()
+
+        Label(master, text = "Lower Rate Limit (ppm)").pack()
+        CHOICES = [
+            "30","35","40","45","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70",
+            "70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89",
+            "90","95","105","110","115","120","125","130","135","140","145","150","155","160","165","170","175",
+        ]
+        choice = DoubleVar()
+        choice.set(CHOICES[0])
+        list = ttk.Combobox(master, value= CHOICES)
+        list.current(14)
+        list.bind("<<ComboboxSelected>>")
+        list.pack() 
+        Label(master, text = "").pack()
+
+
+        Label(master, text = "Upper Rate Limit (ppm)").pack()
+        UPPER_RATE_LIMIT = Scale(master, from_=50, to =175, resolution=5, orient=HORIZONTAL)
+        UPPER_RATE_LIMIT.set(120)
+
+        UPPER_RATE_LIMIT.pack()
+        Label(master, text = "").pack()
+        
+        Label(master, text = "Maximum Sensor Rate (ppm)").pack()
+        Max_Sensor_Rate = Scale(master, from_=50, to =175, resolution=5, orient=HORIZONTAL)
+        Max_Sensor_Rate.set(120)
+
+        Max_Sensor_Rate.pack()
+        Label(master, text = "").pack()
+        Label(master, text = "Ventricular Amplitude (V)").pack()
+        CHOICES1 = [
+            "0","0.5","0.6","0.7","0.8","0.9","1.0","1.1","1.2","1.3","1.4","1.5","1.6","1.7","1.8","1.9","2.0",
+            "2.1","2.2","2.3","2.4","2.5","2.6","2.7","2.8","2.9","3.0","3.1","3.2","3.5","4.0","4.5","5.0","5.5",
+            "6.0","6.5","7.0","7.5",
+        ]
+        choice1 = DoubleVar()
+        choice1.set(CHOICES1[0])
+        list1 = ttk.Combobox(master, value= CHOICES1)
+        list1.current(29)
+        list1.bind("<<ComboboxSelected>>")
+        list1.pack()
+        Label(master, text = "").pack()
+
+
+
+
+
+        Label(master, text = "Ventricular Pulse Width (ms)").pack()
+        CHOICES2 = [
+            "0.05","0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","0.9","1.0","1.1","1.2","1.3","1.4","1.5","1.6","1.7","1.8","1.9",
+        ]
+        choice2 = DoubleVar()
+        choice2.set(CHOICES2[0])
+        list2 = ttk.Combobox(master, value= CHOICES2)
+        list2.current(4)
+        list2.bind("<<ComboboxSelected>>")
+        list2.pack()
+        Label(master, text = "").pack()
+        
+
+        Label(master, text = "Activity Threshold").pack()
+        CHOICES3 = ["V-Low","Low","Med-Low","Med","Med-High","High","V-High"]
+        choice3 = DoubleVar()
+        choice3.set(CHOICES3[0])
+        list3 = ttk.Combobox(master, value= CHOICES3)
+        list3.current(0)
+        list3.bind("<<ComboboxSelected>>")
+        list3.pack()
+        Label(master, text = "").pack() 
+        
+        Label(master, text = "Reaction Time (s)").pack()
+        Reaction_Time = Scale(master, from_=10, to =50, resolution=10, orient=HORIZONTAL)
+        Reaction_Time.set(120)
+
+        Reaction_Time.pack()
+        Label(master, text = "").pack()
+
+        
+        Label(master, text = "Response Factor (min)").pack()
+        Response_Factor = Scale(master, from_=1, to =16, resolution=1, orient=HORIZONTAL)
+        Response_Factor.set(120)
+
+        Response_Factor.pack()
+        Label(master, text = "").pack()
+
+
+        Label(master, text = "Recovery Time (min)").pack()
+        Response_time = Scale(master, from_=2, to =16, resolution=1, orient=HORIZONTAL)
+        Response_time.set(120)
+        Response_time.pack()
+        Label(master, text = "").pack()
+
+        def connect2():
+            global window
+            window = Tk()
+            window.geometry('925x320+300+150')
+            
+            Label(window, text = "Please select your mode:", font = ("Calibri", 13)).place(x=400,y=10)
+
+        #############################################BUTTONS FOR MODES
+
+            button2 = Button(window,width=20, pady=6,  text= "1.    AOO",bg='white', fg='black', border=1,command=AOO).place(x=300,y=40) #input button
+            
+            button3 = Button(window,width=20, pady=6,  text= "2.    VVI",bg='white', fg='black', border=1,command=VVI).place(x=300,y=100) #input button
+
+            button4 = Button(window,width=20, pady=6,  text= "3.    VOO",bg='white', fg='black', border=1,command=VOO).place(x=300,y=160) #input button
+
+            button5 = Button(window,width=20, pady=6, text= "4.     AAI",bg='white', fg='black', border=1,command=AAI).place(x=300,y=220) #input button
+            
+            button6 = Button(window,width=20, pady=6, text= "5.     AOOR",bg='white', fg='black', border=1,command=AOOR).place(x=460,y=40) #input button
+            button7 = Button(window,width=20, pady=6, text= "6.     VOOR",bg='white', fg='black', border=1,command=VOOR).place(x=460,y=100) #input button       
+            button8 = Button(window,width=20, pady=6, text= "7.     AAIR",bg='white', fg='black', border=1,command=AAIR).place(x=460,y=160) #input button
+            button9 = Button(window,width=20, pady=6, text= "8.     VVIR",bg='white', fg='black', border=1,command=VVIR).place(x=460,y=220) #input button
+            Button(window, width=20, pady=2, text="Logout",bg='black', fg='white', border=1, command=window.destroy).place(x=400, y=280) #button to close the window
+            Label(window, text = "Pacemaker User:  %s" % (username),font = ("Calibri", 13)).pack(side = LEFT )
+            Label(window, text = "CONNECTED TO PACEMAKER",fg = 'green' ,font = 'Helvetica 9 bold').pack(side = RIGHT)
+
+            master.destroy()
+
+            
+            window.mainloop()
+                
+        def DISPLAY():
+            global LOWER_RATE_LIMIT
+            global UPPER_RATE_LIMIT
+            global Max_Sensor_Rate
+            global B_AMPLITUDE
+            global PULSE_WIDTH
+            global ATR_TH
+            global REACTION_T
+            global RESPONSE_F
+            global RECOVERY_T
+            
+            
+            LOWER_RATE_LIMIT = list.get()
+            B_AMPLITUDE = list1.get()
+            PULSE_WIDTH = list2.get()
+            ATR_TH = list3.get()
+            
+
+            SET_VALS()
+            Label(master, text = "Your values have been saved", font = ("Calibri", 13)).place(x=480,y=720)
+          
+        Button(master, text = "Save", width="3", height = "1", command = DISPLAY).pack()
+        Button(master, text = "Load", width="3", height = "1", command = ACCESS_LOAD).pack()
+        Button(master, text="Back", command=connect2).pack() #button to close the window
+        Label(master, text = "Pacemaker User:  %s" % (username),font = ("Calibri", 13)).pack(side = LEFT )
+        Label(master, text = "").pack()
+
+
+
+        
+    def AAIR(): #function when button is clicked   
+        window.destroy()
+        global SET_CURRENT_MODE
+        SET_CURRENT_MODE = 'AAIR'
+        global master
+        master = Tk()
+        master.geometry("700x600+300+100")
+        master.title("AAIR")
+        global LOWER_RATE_LIMIT
+        global UPPER_RATE_LIMIT
+        global Max_Sensor_Rate
+        global B_AMPLITUDE
+        global PULSE_WIDTH
+        global ATR_TH
+        global REACTION_T
+        global RESPONSE_F
+        global RECOVERY_T
+
+        Label(master, text = "SET VALUES BELOW", font = ("Calibri", 13)).pack()
+        
+
+        Label(master, text = "Lower Rate Limit (ppm)").place(x=200,y=40)
+        CHOICES = [
+            "30","35","40","45","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70",
+            "70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89",
+            "90","95","105","110","115","120","125","130","135","140","145","150","155","160","165","170","175",
+        ]
+        choice = DoubleVar()
+        choice.set(CHOICES[0])
+        list = ttk.Combobox(master, value= CHOICES)
+        list.current(14)
+        list.bind("<<ComboboxSelected>>")
+        list.place(x=200,y=60)
+       
+
+
+        Label(master, text = "Upper Rate Limit (ppm)").place(x=200,y=100)
+        UPPER_RATE_LIMIT = Scale(master, from_=50, to =175, resolution=5, orient=HORIZONTAL)
+        UPPER_RATE_LIMIT.set(120)
+        UPPER_RATE_LIMIT.place(x=200,y=120)
+        
+        Label(master, text = "Maximum Sensor Rate (ppm)").place(x=200,y=160)
+        Max_Sensor_Rate = Scale(master, from_=50, to =175, resolution=5, orient=HORIZONTAL)
+        Max_Sensor_Rate.set(120)
+        Max_Sensor_Rate.place(x=200,y=180)
+
+       
+        Label(master, text = "Atrial Amplitude (V)").place(x=200,y=220)
+        CHOICES1 = [
+            "0","0.5","0.6","0.7","0.8","0.9","1.0","1.1","1.2","1.3","1.4","1.5","1.6","1.7","1.8","1.9","2.0",
+            "2.1","2.2","2.3","2.4","2.5","2.6","2.7","2.8","2.9","3.0","3.1","3.2","3.5","4.0","4.5","5.0","5.5",
+            "6.0","6.5","7.0","7.5",
+        ]
+        choice1 = DoubleVar()
+        choice1.set(CHOICES1[0])
+        list1 = ttk.Combobox(master, value= CHOICES1)
+        list1.current(29)
+        list1.bind("<<ComboboxSelected>>")
+        list1.place(x=200,y=240)
+
+        
+        Label(master, text = "Atrial Pulse Width (ms)").place(x=200,y=280)
+        CHOICES2 = [
+            "0.05","0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","0.9","1.0","1.1","1.2","1.3","1.4","1.5","1.6","1.7","1.8","1.9",
+        ]
+        choice2 = DoubleVar()
+        choice2.set(CHOICES2[4])
+        list2 = ttk.Combobox(master, value= CHOICES2)
+        list2.current(0)
+        list2.bind("<<ComboboxSelected>>")
+        list2.place(x=200,y=300)
+        
+
+
+        
+        
+        
+        Label(master, text = "ARP(ms)").place(x=200,y=340)
+        CHOICES3 = [
+            "150","160","170","180","190","200","210","220","230","240","250","260","270","280","290","300","310","320","330","340","350","360","370","380","390","400","410","420","430","440","450","460","470","480","490","500",
+        ]
+        choice3 = DoubleVar()
+        choice3.set(CHOICES3[0])
+        list3 = ttk.Combobox(master, value= CHOICES3)
+        list3.current(17)
+        list3.bind("<<ComboboxSelected>>")
+        list3.place(x=200,y=360)
+        
+        
+        
+        Label(master, text = "Atrial sensistivity").place(x=200,y=400)
+        CHOICES4 = [
+            "0.25","0.5","0.75","1","1.5","2","2.5","3","3.5","4","4.5","5","5.5","6","6.5","7","7.5","8","8.5","9","9.5","10"]
+        choice4 = DoubleVar()
+        choice4.set(CHOICES4[0])
+        list4 = ttk.Combobox(master, value= CHOICES4)
+        list4.current(2)
+        list4.bind("<<ComboboxSelected>>")
+        list4.place(x=200,y=420)
+        
+
+
+
+        Label(master, text = "PVARP").place(x=400,y=100)
+        PVARp = Scale(master, from_=150, to =500,resolution=10, orient=HORIZONTAL)
+        PVARp.set(250)
+        PVARp.place(x=400,y=120)
+        
+        
+
+        Label(master, text = "Activity Threshold").place(x=400,y=40)
+        CHOICES3 = ["V-Low","Low","Med-Low","Med","Med-High","High","V-High"]
+        choice3 = DoubleVar()
+        choice3.set(CHOICES3[0])
+        list6 = ttk.Combobox(master, value= CHOICES3)
+        list6.current(0)
+        list6.bind("<<ComboboxSelected>>")
+        list6.place(x=400,y=60)
+        
+        Label(master, text = "Reaction Time (s)").place(x=400,y=160)
+        Reaction_Time = Scale(master, from_=10, to =50, resolution=10, orient=HORIZONTAL)
+        Reaction_Time.set(120)
+        Reaction_Time.place(x=400,y=180)
+
+        
+        Label(master, text = "Response Factor (min)").place(x=400,y=220)
+        Response_Factor = Scale(master, from_=1, to =16, resolution=1, orient=HORIZONTAL)
+        Response_Factor.set(120)
+        Response_Factor.place(x=400,y=240)
+
+
+        Label(master, text = "Recovery Time (min)").place(x=400,y=280)
+        Response_time = Scale(master, from_=2, to =16, resolution=1, orient=HORIZONTAL)
+        Response_time.set(120)
+        Response_time.place(x=400,y=300)
+        def connect2():
+            global window
+            window = Tk()
+            window.geometry('925x320+300+150')
+            
+            Label(window, text = "Please select your mode:", font = ("Calibri", 13)).place(x=400,y=10)
+
+        #############################################BUTTONS FOR MODES
+
+            button2 = Button(window,width=20, pady=6,  text= "1.    AOO",bg='white', fg='black', border=1,command=AOO).place(x=300,y=40) #input button
+            
+            button3 = Button(window,width=20, pady=6,  text= "2.    VVI",bg='white', fg='black', border=1,command=VVI).place(x=300,y=100) #input button
+
+            button4 = Button(window,width=20, pady=6,  text= "3.    VOO",bg='white', fg='black', border=1,command=VOO).place(x=300,y=160) #input button
+
+            button5 = Button(window,width=20, pady=6, text= "4.     AAI",bg='white', fg='black', border=1,command=AAI).place(x=300,y=220) #input button
+            
+            button6 = Button(window,width=20, pady=6, text= "5.     AOOR",bg='white', fg='black', border=1,command=AOOR).place(x=460,y=40) #input button
+            button7 = Button(window,width=20, pady=6, text= "6.     VOOR",bg='white', fg='black', border=1,command=VOOR).place(x=460,y=100) #input button       
+            button8 = Button(window,width=20, pady=6, text= "7.     AAIR",bg='white', fg='black', border=1,command=AAIR).place(x=460,y=160) #input button
+            button9 = Button(window,width=20, pady=6, text= "8.     VVIR",bg='white', fg='black', border=1,command=VVIR).place(x=460,y=220) #input button
+            Button(window, width=20, pady=2, text="Logout",bg='black', fg='white', border=1, command=window.destroy).place(x=400, y=280) #button to close the window
+            Label(window, text = "Pacemaker User:  %s" % (username),font = ("Calibri", 13)).pack(side = LEFT )
+            Label(window, text = "CONNECTED TO PACEMAKER",fg = 'green' ,font = 'Helvetica 9 bold').pack(side = RIGHT)
+
+            master.destroy()
+
+            
+            window.mainloop()
+        
+        
+        def DISPLAY():
+            global LOWER_RATE_LIMIT
+            global UPPER_RATE_LIMIT
+            global Max_Sensor_Rate
+            global B_AMPLITUDE
+            global PULSE_WIDTH
+            global ATR_TH
+            global REACTION_T
+            global RESPONSE_F
+            global RECOVERY_T
+            
+            
+            LOWER_RATE_LIMIT = list.get()
+            B_AMPLITUDE = list1.get()
+            PULSE_WIDTH = list2.get()
+            ATR_TH = list3.get()
+            
+
+            SET_VALS()
+            Label(master, text = "Your values have been saved", font = ("Calibri", 13)).place(x=180,y=460)
+          
+        Button(master, text = "Save", width="3", height = "1", command = DISPLAY).place(x=400,y=360)
+        Button(master, text = "Load", width="3", height = "1", command = ACCESS_LOAD).place(x=400,y=390)
+        Button(master, text="Back", command=connect2).place(x=400,y=420) #button to close the window
+        Label(master, text = "Pacemaker User:  %s" % (username),font = ("Calibri", 13)).pack(side = LEFT )
+        Label(master, text = "").pack()
+
+
+
+
+        
+    def VVIR(): #function when button is clicked   
+        window.destroy()
+        global SET_CURRENT_MODE
+        SET_CURRENT_MODE = 'VVIR'
+        global master
+        master = Tk()
+        master.geometry("700x600+300+100")
+        master.title("VVIR")
+        global LOWER_RATE_LIMIT
+        global UPPER_RATE_LIMIT
+        global Max_Sensor_Rate
+        global B_AMPLITUDE
+        global PULSE_WIDTH
+        global ATR_TH
+        global REACTION_T
+        global RESPONSE_F
+        global RECOVERY_T
+
+        Label(master, text = "SET VALUES BELOW", font = ("Calibri", 13)).pack()
+        
+        Label(master, text = "Lower Rate Limit (ppm)").place(x=200,y=40)
+        CHOICES = [
+            "30","35","40","45","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70",
+            "70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89",
+            "90","95","105","110","115","120","125","130","135","140","145","150","155","160","165","170","175",
+        ]
+        choice = DoubleVar()
+        choice.set(CHOICES[0])
+        list = ttk.Combobox(master, value= CHOICES)
+        list.current(14)
+        list.bind("<<ComboboxSelected>>")
+        list.place(x=200,y=60)
+        
+
+
+        Label(master, text = "Upper Rate Limit (ppm)").place(x=200,y=100)
+        UPPER_RATE_LIMIT = Scale(master, from_=50, to =175, resolution=5, orient=HORIZONTAL)
+        UPPER_RATE_LIMIT.set(120)
+        UPPER_RATE_LIMIT.place(x=200,y=120)
+     
+        
+        Label(master, text = "Maximum Sensor Rate (ppm)").place(x=200,y=160)
+        Max_Sensor_Rate = Scale(master, from_=50, to =175, resolution=5, orient=HORIZONTAL)
+        Max_Sensor_Rate.set(120)
+        Max_Sensor_Rate.place(x=200,y=180)
+  
+        Label(master, text = "Ventricular Amplitude (V)").place(x=200,y=220)
+        CHOICES1 = [
+            "0","0.5","0.6","0.7","0.8","0.9","1.0","1.1","1.2","1.3","1.4","1.5","1.6","1.7","1.8","1.9","2.0",
+            "2.1","2.2","2.3","2.4","2.5","2.6","2.7","2.8","2.9","3.0","3.1","3.2","3.5","4.0","4.5","5.0","5.5",
+            "6.0","6.5","7.0","7.5",
+        ]
+        choice1 = DoubleVar()
+        choice1.set(CHOICES1[0])
+        list1 = ttk.Combobox(master, value= CHOICES1)
+        list1.current(29)
+        list1.bind("<<ComboboxSelected>>")
+        list1.place(x=200,y=240)
+      
+
+        Label(master, text = "Ventricular Pulse Width (ms)").place(x=200,y=280)
+        CHOICES2 = [
+            "0.05","0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","0.9","1.0","1.1","1.2","1.3","1.4","1.5","1.6","1.7","1.8","1.9",
+        ]
+        choice2 = DoubleVar()
+        choice2.set(CHOICES2[0])
+        list2 = ttk.Combobox(master, value= CHOICES2)
+        list2.current(4)
+        list2.bind("<<ComboboxSelected>>")
+        list2.place(x=200,y=300)
+      
+
+        Label(master, text = "VRP(ms)").place(x=200,y=340)
+        CHOICES3 = [
+            "150","160","170","180","190","200","210","220","230","240","250","260","270","280","290","300","310","320","330","340","350","360","370","380","390","400","410","420","430","440","450","460","470","480","490","500",
+        ]
+        choice3 = DoubleVar()
+        choice3.set(CHOICES3[0])
+        list3 = ttk.Combobox(master, value= CHOICES3)
+        list3.current(17)
+        list3.bind("<<ComboboxSelected>>")
+        list3.place(x=200,y=360)
+  
+
+        
+        Label(master, text = "Ventricular sensistivity").place(x=200,y=400)
+        CHOICES4 = [
+            "0.25","0.5","0.75","1","1.5","2","2.5","3","3.5","4","4.5","5","5.5","6","6.5","7","7.5","8","8.5","9","9.5","10"]
+        choice4 = DoubleVar()
+        choice4.set(CHOICES4[0])
+        list4 = ttk.Combobox(master, value= CHOICES4)
+        list4.current(6)
+        list4.bind("<<ComboboxSelected>>")
+        list4.place(x=200,y=420)
+
+
+
+        
+
+        Label(master, text = "Activity Threshold").place(x=400,y=40)
+        CHOICES6 = ["V-Low","Low","Med-Low","Med","Med-High","High","V-High"]
+        choice6 = DoubleVar()
+        choice6.set(CHOICES3[0])
+        list6 = ttk.Combobox(master, value= CHOICES3)
+        list6.current(0)
+        list6.bind("<<ComboboxSelected>>")
+        list6.place(x=400,y=60)
+    
+        
+        Label(master, text = "Reaction Time (s)").place(x=400,y=100)
+        Reaction_Time = Scale(master, from_=10, to =50, resolution=10, orient=HORIZONTAL)
+        Reaction_Time.set(120)
+        Reaction_Time.place(x=400,y=120)
+        
+
+        
+        Label(master, text = "Response Factor (min)").place(x=400,y=160)
+        Response_Factor = Scale(master, from_=1, to =16, resolution=1, orient=HORIZONTAL)
+        Response_Factor.set(120)
+        Response_Factor.place(x=400,y=180)
+        
+
+
+        Label(master, text = "Recovery Time (min)").place(x=400,y=220)
+        Response_time = Scale(master, from_=2, to =16, resolution=1, orient=HORIZONTAL)
+        Response_time.set(120)
+        Response_time.place(x=400,y=240)
+      
+        def connect2():
+            global window
+            window = Tk()
+            window.geometry('925x320+300+150')
+            
+            Label(window, text = "Please select your mode:", font = ("Calibri", 13)).place(x=400,y=10)
+
+        #############################################BUTTONS FOR MODES
+
+            button2 = Button(window,width=20, pady=6,  text= "1.    AOO",bg='white', fg='black', border=1,command=AOO).place(x=300,y=40) #input button
+            
+            button3 = Button(window,width=20, pady=6,  text= "2.    VVI",bg='white', fg='black', border=1,command=VVI).place(x=300,y=100) #input button
+
+            button4 = Button(window,width=20, pady=6,  text= "3.    VOO",bg='white', fg='black', border=1,command=VOO).place(x=300,y=160) #input button
+
+            button5 = Button(window,width=20, pady=6, text= "4.     AAI",bg='white', fg='black', border=1,command=AAI).place(x=300,y=220) #input button
+            
+            button6 = Button(window,width=20, pady=6, text= "5.     AOOR",bg='white', fg='black', border=1,command=AOOR).place(x=460,y=40) #input button
+            button7 = Button(window,width=20, pady=6, text= "6.     VOOR",bg='white', fg='black', border=1,command=VOOR).place(x=460,y=100) #input button       
+            button8 = Button(window,width=20, pady=6, text= "7.     AAIR",bg='white', fg='black', border=1,command=AAIR).place(x=460,y=160) #input button
+            button9 = Button(window,width=20, pady=6, text= "8.     VVIR",bg='white', fg='black', border=1,command=VVIR).place(x=460,y=220) #input button
+            Button(window, width=20, pady=2, text="Logout",bg='black', fg='white', border=1, command=window.destroy).place(x=400, y=280) #button to close the window
+            Label(window, text = "Pacemaker User:  %s" % (username),font = ("Calibri", 13)).pack(side = LEFT )
+            Label(window, text = "CONNECTED TO PACEMAKER",fg = 'green' ,font = 'Helvetica 9 bold').pack(side = RIGHT)
+
+            master.destroy()
+
+            
+            window.mainloop()
+        
+        def DISPLAY():
+            global LOWER_RATE_LIMIT
+            global UPPER_RATE_LIMIT
+            global Max_Sensor_Rate
+            global B_AMPLITUDE
+            global PULSE_WIDTH
+            global ATR_TH
+            global REACTION_T
+            global RESPONSE_F
+            global RECOVERY_T
+            
+            
+            LOWER_RATE_LIMIT = list.get()
+            B_AMPLITUDE = list1.get()
+            PULSE_WIDTH = list2.get()
+            ATR_TH = list3.get()
+            
+
+            SET_VALS()
+            Label(master, text = "Your values have been saved", font = ("Calibri", 13)).place(x=180,y=460)
+          
+        Button(master, text = "Save", width="3", height = "1", command = DISPLAY).place(x=400,y=300)
+        Button(master, text = "Load", width="3", height = "1", command = ACCESS_LOAD).place(x=400,y=330)
+        Button(master, text="Back", command=connect2).place(x=400,y=360) #button to close the window
+        Label(master, text = "Pacemaker User:  %s" % (username),font = ("Calibri", 13)).pack(side = LEFT )
+        Label(master, text = "").pack()
+
+
+
   ###############################################################
 
            #                  CONNECT SCREEN + MODES                   
 
-###############################################################      
+###############################################################  
+    
+        
     def connect():
         screen.destroy()
-        messagebox.showinfo('Success','Device Connected!')
-     
         
-        window = Tk()
-        window.geometry('925x320+300+150')
-        button2 = Button(window,width=20, pady=6,  text= "1.    AOO",bg='white', fg='black', border=1,command=AOO).place(x=420,y=40) #input button
-     
-        Label(window, text = "Please select your mode:", font = ("Calibri", 13)).place(x=420,y=20)
+        
+        # connected via UArt
+        try:
+            seria = serial.Serial("COM6",115200)
+            messagebox.showinfo('Success', 'You have been successfully connected!')
+           
+           
+           
+            global window
+            window = Tk()
+            window.geometry('925x320+300+150')
+            
+            Label(window, text = "Please select your mode:", font = ("Calibri", 13)).place(x=400,y=10)
+            button2 = Button(window,width=20, pady=6,  text= "1.    AOO",bg='white', fg='black', border=1,command=AOO).place(x=300,y=40) #input button
+            
+            button3 = Button(window,width=20, pady=6,  text= "2.    VVI",bg='white', fg='black', border=1,command=VVI).place(x=300,y=100) #input button
 
-       
-#############################################BUTTONS FOR MODES
+            button4 = Button(window,width=20, pady=6,  text= "3.    VOO",bg='white', fg='black', border=1,command=VOO).place(x=300,y=160) #input button
+        
+            button5 = Button(window,width=20, pady=6, text= "4.     AAI",bg='white', fg='black', border=1,command=AAI).place(x=300,y=220) #input button
+            
+            button6 = Button(window,width=20, pady=6, text= "5.     AOOR",bg='white', fg='black', border=1,command=AOOR).place(x=460,y=40) #input button
+            button7 = Button(window,width=20, pady=6, text= "6.     VOOR",bg='white', fg='black', border=1,command=VOOR).place(x=460,y=100) #input button       
+            button8 = Button(window,width=20, pady=6, text= "7.     AAIR",bg='white', fg='black', border=1,command=AAIR).place(x=460,y=160) #input button
+            button9 = Button(window,width=20, pady=6, text= "8.     VVIR",bg='white', fg='black', border=1,command=VVIR).place(x=460,y=220) #input button
+            Button(window, width=20, pady=2, text="Logout",bg='black', fg='white', border=1, command=window.destroy).place(x=400, y=280) #button to close the window
+            Label(window, text = "Pacemaker User:  %s" % (username),font = ("Calibri", 13)).pack(side = LEFT )
+            Label(window, text = "CONNECTED TO PACEMAKER",fg = 'green' ,font = 'Helvetica 9 bold').pack(side = RIGHT)
+            window.mainloop()
+           
+        except:
+            messagebox.showerror('Error', 'Make sure to connect the pacemaker!')
+            window = Tk()
+            window.geometry('925x320+300+150')
+            
+            Label(window, text = "Please select your mode:", font = ("Calibri", 13)).place(x=400,y=10)
+            button2 = Button(window,width=20, pady=6,  text= "1.    AOO",bg='white', fg='black', border=1,command=AOO).place(x=300,y=40) #input button
+            
+            button3 = Button(window,width=20, pady=6,  text= "2.    VVI",bg='white', fg='black', border=1,command=VVI).place(x=300,y=100) #input button
 
-        button3 = Button(window,width=20, pady=6,  text= "2.    VVI",bg='white', fg='black', border=1,command=VVI).place(x=420,y=100) #input button
-   
-        button4 = Button(window,width=20, pady=6,  text= "3.    VOO",bg='white', fg='black', border=1,command=VOO).place(x=420,y=160) #input button
-    
-        button5 = Button(window,width=20, pady=6, text= "4.     AAI",bg='white', fg='black', border=1,command=AAI).place(x=420,y=220) #input button
-      
+            button4 = Button(window,width=20, pady=6,  text= "3.    VOO",bg='white', fg='black', border=1,command=VOO).place(x=300,y=160) #input button
+        
+            button5 = Button(window,width=20, pady=6, text= "4.     AAI",bg='white', fg='black', border=1,command=AAI).place(x=300,y=220) #input button
+            
+            button6 = Button(window,width=20, pady=6, text= "5.     AOOR",bg='white', fg='black', border=1,command=AOOR).place(x=460,y=40) #input button
+            button7 = Button(window,width=20, pady=6, text= "6.     VOOR",bg='white', fg='black', border=1,command=VOOR).place(x=460,y=100) #input button       
+            button8 = Button(window,width=20, pady=6, text= "7.     AAIR",bg='white', fg='black', border=1,command=AAIR).place(x=460,y=160) #input button
+            button9 = Button(window,width=20, pady=6, text= "8.     VVIR",bg='white', fg='black', border=1,command=VVIR).place(x=460,y=220) #input button
+            Button(window, width=20, pady=2, text="Logout",bg='black', fg='white', border=1, command=window.destroy).place(x=400, y=280) #button to close the window
+            Label(window, text = "Pacemaker User:  %s" % (username),font = ("Calibri", 13)).pack(side = LEFT )
+            Label(window, text = "CONNECTED TO PACEMAKER",fg = 'green' ,font = 'Helvetica 9 bold').pack(side = RIGHT)
+            window.mainloop()
 
-        Button(window, width=20, pady=2, text="Logout",bg='black', fg='white', border=1, command=window.destroy).place(x=420, y=280) #button to close the window
-        Label(window, text = "Pacemaker User:  %s" % (username),font = ("Calibri", 13)).pack(side = LEFT )
-        Label(window, text = "CONNECTED TO PACEMAKER",fg = 'green' ,font = 'Helvetica 9 bold').pack(side = RIGHT)
+
+    #############################################BUTTONS FOR MODES
+
+            
+
 
         
-        window.mainloop()
+
 ##############################################CONNECT BUTTON          
     if username in r.keys() and password==r[username]:
         
@@ -700,8 +1594,8 @@ def signin():
         button.config(command=connect)
         button.pack(side=TOP,padx=0,pady=0)
        
- 
         
+            
         
         frame = Frame(screen, width=350, height=350, bg='white')
         frame.place(x=250, y=100)
@@ -763,6 +1657,8 @@ def registerPopup():
                 dict = {username: password}
                 if any(c in space for c in password):
                     messagebox.showerror('Error', 'Space in password!')
+                elif (username is None or lengUser ==0 or username =="username" or username == '' or username == ""):
+                    messagebox.showerror('Error', 'EMPTY user!')
                 elif (lengPass > 20):
                     messagebox.showerror('Error', 'more than 20 characters!')
                 elif username in r.keys():
@@ -894,6 +1790,7 @@ def registerPopup():
 
     passw = Entry(window, width=25, fg='black', border=0, bg='white', font=('Microsoft Yahei UI Light', 11))
     passw.place(x=50, y=170)
+    passw.config(show='*')
     passw.insert(0, 'password')
     passw.bind("<FocusIn>", Enter)
     passw.bind("<FocusOut>", Leave)
@@ -909,6 +1806,7 @@ def registerPopup():
 
     passwConfirm = Entry(window, width=25, fg='black', border=0, bg='white', font=('Microsoft Yahei UI Light', 11))
     passwConfirm.place(x=50, y=230)
+    passwConfirm.config(show='*')
     passwConfirm.insert(0, 'Confirm Password')
     passwConfirm.bind("<FocusIn>", Enter)
     passwConfirm.bind("<FocusOut>", Leave)
@@ -948,6 +1846,7 @@ def BOXEXIT1(e):
 
 passw = Entry(frame, width=36, fg='black', border=0, bg='white', font=('Microsoft YaHei UI Light', 11))
 passw.place(x=75, y=150)
+passw.config(show='*')
 passw.insert(0, 'password')
 passw.bind('<FocusIn>', BOXENTER1)
 passw.bind('<FocusOut>', BOXEXIT1)
@@ -1121,6 +2020,7 @@ def SET_VALS():
 ###############################################################
 ###############################################################
 ###############################################################
+
 def ACCESS_LOAD():
     #check the mode 
     if SET_CURRENT_MODE=='VOO':
@@ -1347,7 +2247,7 @@ def ACCESS_LOAD():
                     Button(window, text = "Confirm", width="6", height = "1", command = loaded).place(x=850,y=250)
                     Button(window, text="Edit", command=window.destroy).place(x=850,y=280) #button to close the window
                     
-    
+
 wind.mainloop()
 
 
@@ -1358,7 +2258,3 @@ wind.mainloop()
 
 
 # In[ ]:
-
-
-
-

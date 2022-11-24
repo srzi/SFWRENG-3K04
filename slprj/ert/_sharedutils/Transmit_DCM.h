@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'Group30_SFWR_Assignment1_SIMULINK'.
  *
- * Model version                  : 1.97
+ * Model version                  : 1.100
  * Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
- * C/C++ source code generated on : Thu Nov 24 17:24:27 2022
+ * C/C++ source code generated on : Thu Nov 24 17:43:38 2022
  */
 
 #ifndef RTW_HEADER_Transmit_DCM_h_

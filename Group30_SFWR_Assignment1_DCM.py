@@ -26,7 +26,7 @@ wind.title("Login")
 wind.geometry('925x500+300+150')
 wind.configure(bg='#fff')
 wind.resizable(False, False)
-serial_port = "COM6"
+serial_port = "COM3"
 frame = Frame(wind, width=350, height=350, bg='white')
 frame.place(x=250, y=100)
 
@@ -2467,7 +2467,7 @@ def ACCESS_LOAD():
                             
                             time.sleep(0.5)
 
-                            Pace_mode = 0 #0 - VTR, 1 - ATR
+                            Pace_mode = 1 #0 - VTR, 1 - ATR
                             Sensing_control = 1 #0 - OFF, 1 - ON
                             Ventricle_amplitude = 0 #In *10 volts, so 3.5V
                             Atrial_amplitude = int(float(AAI_ATRIAL_AMP)*10)
@@ -2477,8 +2477,8 @@ def ACCESS_LOAD():
                             Ventricle_rf_period = int(AAI_ARP)
                             Lower_rate_limit = int(AAI_LOWER_RATE) #in ms
                             Upper_rate_limit = int(AAI_UPPER_RATE)
-                            Atrial_sensitivity = 0 #in *10 volts
-                            Ventricle_sensitivity = int(float(AAI_ATRIAL_SENSETIVITY)*10)
+                            Atrial_sensitivity = int(float(AAI_ATRIAL_SENSETIVITY)*10) #in *10 volts
+                            Ventricle_sensitivity = 0
 
 
 

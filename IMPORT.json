@@ -1,0 +1,74 @@
+[
+    {
+        "username": " ",
+        "AOO": {
+            "LOWER RL": "",
+            "UPPER RL": "",
+            "ATRIAL AMPLITUDE": "",
+            "ATRIAL PW": ""
+        },
+        "AAI": {
+            "LOWER RL": "",
+            "UPPER RL": "",
+            "ATRIAL AMPLITUDE": "",
+            "ATRIAL PW": "",
+            "ARP": "",
+            "AS": "",
+            "PVARP": "",
+            "H": "",
+            "S": ""
+        },
+        "VOO": {
+            "LOWER RL": "",
+            "UPPER RL": "",
+            "VA": "",
+            "VENTRICULAR PULSE WIDTH": ""
+        },
+        "VVI": {
+            "LOWER RL": "",
+            "UPPER RL": "",
+            "VA": "",
+            "VENTRICULAR PULSE WIDTH": "",
+            "VRP": "",
+            "VS": "",
+            "H": "",
+            "S": ""
+        }
+    },
+    {
+        "username": "nick",
+        "AOO": {
+            "LOWER RL": "",
+            "UPPER RL": "",
+            "ATRIAL AMPLITUDE": "",
+            "ATRIAL PW": ""
+        },
+        "AAI": {
+            "LOWER RL": "",
+            "UPPER RL": "",
+            "ATRIAL AMPLITUDE": "",
+            "ATRIAL PW": "",
+            "ARP": "",
+            "AS": "",
+            "PVARP": "",
+            "H": "",
+            "S": ""
+        },
+        "VOO": {
+            "LOWER RL": "",
+            "UPPER RL": "",
+            "VA": "",
+            "VENTRICULAR PULSE WIDTH": ""
+        },
+        "VVI": {
+            "LOWER RL": "",
+            "UPPER RL": "",
+            "VA": "",
+            "VENTRICULAR PULSE WIDTH": "",
+            "VRP": "",
+            "VS": "",
+            "H": "",
+            "S": ""
+        }
+    }
+]

@@ -16,6 +16,8 @@ import serial
 import decimal
 from decimal import Decimal
 import time
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 import math
 import struct
@@ -24,7 +26,7 @@ wind.title("Login")
 wind.geometry('925x500+300+150')
 wind.configure(bg='#fff')
 wind.resizable(False, False)
-serial_port = "COM3"
+serial_port = "COM6"
 frame = Frame(wind, width=350, height=350, bg='white')
 frame.place(x=250, y=100)
 
@@ -172,7 +174,7 @@ def signin():
 
         Button(master, text = "Save", width="3", height = "1", command = DISPLAY).pack()
         Button(master, text = "Load", width="3", height = "1", command = ACCESS_LOAD).pack()
-        Button(master, text="ECG", command=connect2).pack() #button to close the window
+        Button(master, text="ECG", command=ECG).pack() #button to close the window
         Button(master, text="Back", command= connect2).pack() #button to close the window
         Label(master, text = "Pacemaker User:  %s" % (username),font = ("Calibri", 12)).pack(side = LEFT )
         master.mainloop()
@@ -325,7 +327,7 @@ def signin():
             # print("_____________________________________")
         Button(master, text = "Save", width="3", height = "1", command = DISPLAY).pack()
         Button(master, text = "Load", width="3", height = "1", command = ACCESS_LOAD).pack()
-        Button(master, text="ECG", command=connect2).pack() #button to close the window
+        Button(master, text="ECG", command=ECG).pack() #button to close the window
         Button(master, text="Back", command=connect2).pack() #button to close the window
         Label(master, text = "Pacemaker User:  %s" % (username),font = ("Calibri", 13)).pack(side = LEFT )
 
@@ -554,7 +556,7 @@ def signin():
             # print("_____________________________________") 
         Button(master, text = "Save", width="3", height = "1", command = DISPLAY).pack()
         Button(master, text = "Load", width="3", height = "1", command = ACCESS_LOAD).pack()
-        Button(master, text="ECG", command=connect2).pack() #button to close the window
+        Button(master, text="ECG", command=ECG).pack() #button to close the window
 
         Button(master, text="Back", command=connect2).pack() #button to close the window
         
@@ -788,7 +790,7 @@ def signin():
             # print("_____________________________________")            
         Button(master, text = "Save", width="3", height = "1", command = DISPLAY).pack()
         Button(master, text = "Load", width="3", height = "1", command = ACCESS_LOAD).pack()
-        Button(master, text="ECG", command=connect2).pack() #button to close the window
+        Button(master, text="ECG", command=ECG).pack() #button to close the window
 
         Button(master, text="Back", command=connect2).pack() #button to close the window
         Label(master, text = "Pacemaker User:  %s" % (username),font = ("Calibri", 13)).pack(side = LEFT )
@@ -1527,7 +1529,27 @@ def signin():
            #                  CONNECT SCREEN + MODES                   
 
 ###############################################################  
-    
+    def ECG():
+        y_axis = []
+        for i in range(2000):
+            ser.write(b'\x16'+b'\x22'+(struct.pack("B",0)*14))
+            data = ser.read(22)
+                
+            y_axis.append(struct.unpack("f",data[14:18])[0])
+            #print(struct.unpack("f",data[14:18])[0])
+            #time.sleep(0.001)
+            
+        x_axis = []
+        for i in range(2000):
+            x_axis.append(i)
+
+        plt.plot(x_axis, y_axis)
+        plt.title('Pacemaker EGM Data')
+        plt.xlabel('milliseconds (ms)')
+        plt.ylabel('millivolts (mV)')
+        plt.show()
+
+        
     def connect():
         screen.destroy()
         
